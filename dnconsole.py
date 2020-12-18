@@ -2,6 +2,8 @@ import os
 import shutil
 import time
 import cv2 as cv
+
+
 class DnPlayer(object):
     def __init__(self, info: list):
         super(DnPlayer, self).__init__()
@@ -13,10 +15,10 @@ class DnPlayer(object):
         self.is_in_android = True if int(info[4]) == 1 else False
         self.pid = int(info[5])
         self.vbox_pid = int(info[6])
- 
+
     def is_running(self) -> bool:
         return self.is_in_android
- 
+
     def __str__(self):
         index = self.index
         name = self.name
@@ -27,15 +29,20 @@ class DnPlayer(object):
         vpid = self.vbox_pid
         return "\nindex:%d name:%s top:%08X bind:%08X running:%s pid:%d vbox_pid:%d\n" % (
             index, name, twh, bwh, r, pid, vpid)
+
+
 class UserInfo:
-    def __init__(self,*args,**kwargs):
+    def __init__(self, *args, **kwargs):
+        self.info = None
         pass
+
+
 class Dnconsole:
     # 请根据自己电脑配置
     console = 'E:\\leidian\\LDPlayer4\\ldconsole.exe '
     ld = 'E:\\leidian\\LDPlayer4\\ld.exe '
     share_path = 'C:/Users/fan/Documents/雷电模拟器/Pictures'
- 
+
     @staticmethod
     def get_list():
         cmd = os.popen(Dnconsole.console + 'list2')
@@ -48,7 +55,7 @@ class Dnconsole:
                 dnplayer = line.split(',')
                 result.append(DnPlayer(dnplayer))
         return result
- 
+
     @staticmethod
     def list_running() -> list:
         result = list()
@@ -57,14 +64,14 @@ class Dnconsole:
             if dn.is_running() is True:
                 result.append(dn)
         return result
- 
+
     @staticmethod
     def is_running(index: int) -> bool:
         all = Dnconsole.get_list()
         if index >= len(all):
             raise IndexError('%d is not exist' % index)
         return all[index].is_running()
- 
+
     @staticmethod
     def dnld(index: int, command: str, silence: bool = True):
         cmd = Dnconsole.ld + '-s %d "%s"' % (index, command)
@@ -76,7 +83,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def adb(index: int, command: str, silence: bool = False) -> str:
         cmd = Dnconsole.console + 'adb --index %d --command "%s"' % (index, command)
@@ -87,13 +94,13 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def install(index: int, path: str):
         shutil.copy(path, Dnconsole.share_path + str(index) + '/update.apk')
         time.sleep(1)
         Dnconsole.dnld(index, 'pm install /sdcard/Pictures/update.apk')
- 
+
     @staticmethod
     def uninstall(index: int, package: str):
         cmd = Dnconsole.console + 'uninstallapp --index %d --packagename %s' % (index, package)
@@ -101,7 +108,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def invokeapp(index: int, package: str):
         cmd = Dnconsole.console + 'runapp --index %d --packagename %s' % (index, package)
@@ -110,7 +117,7 @@ class Dnconsole:
         process.close()
         print(result)
         return result
- 
+
     @staticmethod
     def stopapp(index: int, package: str):
         cmd = Dnconsole.console + 'killapp --index %d --packagename %s' % (index, package)
@@ -118,7 +125,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def input_text(index: int, text: str):
         cmd = Dnconsole.console + 'action --index %d --key call.input --value %s' % (index, text)
@@ -126,7 +133,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def get_package_list(index: int) -> list:
         result = list()
@@ -136,13 +143,13 @@ class Dnconsole:
             if len(i) > 1:
                 result.append(i[8:])
         return result
- 
+
     @staticmethod
     def has_install(index: int, package: str):
         if Dnconsole.is_running(index) is False:
             return False
         return package in Dnconsole.get_package_list(index)
- 
+
     @staticmethod
     def launch(index: int):
         cmd = Dnconsole.console + 'launch --index ' + str(index)
@@ -150,7 +157,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def quit(index: int):
         cmd = Dnconsole.console + 'quit --index ' + str(index)
@@ -158,7 +165,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     # 设置屏幕分辨率为1080×1920
     @staticmethod
     def set_screen_size(index: int):
@@ -167,18 +174,18 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def touch(index: int, x: int, y: int, delay: int = 0):
         if delay == 0:
             Dnconsole.dnld(index, 'input tap %d %d' % (x, y))
         else:
             Dnconsole.dnld(index, 'input swipe %d %d %d %d %d' % (x, y, x, y, delay))
- 
+
     @staticmethod
     def press_key(index: int, key: int):
         Dnconsole.dnld(index, 'input keyevent %d' % key)
- 
+
     @staticmethod
     def swipe(index, coordinate_leftup: tuple, coordinate_rightdown: tuple, delay: int = 0):
         x0 = coordinate_leftup[0]
@@ -189,7 +196,7 @@ class Dnconsole:
             Dnconsole.dnld(index, 'input swipe %d %d %d %d' % (x0, y0, x1, y1))
         else:
             Dnconsole.dnld(index, 'input swipe %d %d %d %d %d' % (x0, y0, x1, y1, delay))
- 
+
     @staticmethod
     def copy(name: str, index: int = 0):
         cmd = Dnconsole.console + 'copy --name %s --from %d' % (name, index)
@@ -197,7 +204,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def add(name: str):
         cmd = Dnconsole.console + 'add --name %s' % name
@@ -205,7 +212,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def auto_rate(index: int, auto_rate: bool = False):
         rate = 1 if auto_rate else 0
@@ -214,7 +221,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def change_device_data(index: int):
         # 改变设备信息
@@ -223,7 +230,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def change_cpu_count(index: int, number: int):
         # 修改cpu数量
@@ -232,7 +239,7 @@ class Dnconsole:
         result = process.read()
         process.close()
         return result
- 
+
     @staticmethod
     def get_cur_activity_xml(index: int):
         # 获取activity的xml信息
@@ -242,7 +249,7 @@ class Dnconsole:
         result = f.read()
         f.close()
         return result
- 
+
     @staticmethod
     def get_user_info(index: int) -> UserInfo:
         xml = Dnconsole.get_cur_activity_xml(index)
@@ -250,7 +257,7 @@ class Dnconsole:
         if 'id' not in usr.info:
             return UserInfo()
         return usr
- 
+
     @staticmethod
     def get_activity_name(index: int):
         text = Dnconsole.dnld(index, 'dumpsys activity top | grep ACTIVITY', False)
@@ -261,7 +268,7 @@ class Dnconsole:
             if s == 'ACTIVITY':
                 return text[i + 1]
         return ''
- 
+
     @staticmethod
     def wait_activity(index: int, activity: str, timeout: int) -> bool:
         for i in range(timeout):
@@ -269,7 +276,7 @@ class Dnconsole:
                 return True
             time.sleep(1)
         return False
- 
+
     @staticmethod
     def find_pic(screen: str, template: str, threshold: float):
         try:
@@ -291,7 +298,7 @@ class Dnconsole:
             return False, None
         print(template, min_val, min_loc)
         return True, min_loc
- 
+
     @staticmethod
     def wait_picture(index: int, timeout: int, template: str) -> bool:
         count = 0
@@ -307,7 +314,7 @@ class Dnconsole:
             print(loc)
             return True
         return False
- 
+
     # 在当前屏幕查看模板列表是否存在,是返回存在的模板,如果多个存在,返回找到的第一个模板
     @staticmethod
     def check_picture(index: int, templates: list):
