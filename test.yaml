@@ -1,0 +1,10 @@
+
+proxies:
+  - {name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯", server: tw01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯"
+rules:
+  - 'MATCH,Proxy'

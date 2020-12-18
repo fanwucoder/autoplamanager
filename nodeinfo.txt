@@ -1,0 +1,70 @@
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯", server: tw01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E02 Netflix 动画疯", server: tw02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E03 Netflix 动画疯", server: tw03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E04 Netflix 动画疯", server: tw04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E05 Netflix 动画疯", server: tw05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E06 Netflix 动画疯", server: tw06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E07 Netflix 动画疯", server: tw07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E08 Netflix 动画疯", server: tw08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E09 Netflix 动画疯", server: tw09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E10 Netflix 动画疯", server: tw10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E01 Netflix 动画疯", server: tw11.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E02 Netflix 动画疯", server: tw12.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E03 Netflix 动画疯", server: tw13.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E04 Netflix 动画疯", server: tw14.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E05 Netflix 动画疯", server: tw15.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E06 Netflix 动画疯", server: tw16.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E07 Netflix 动画疯", server: tw17.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E08 Netflix 动画疯", server: tw18.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E09 Netflix 动画疯", server: tw19.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾 IPLC HiNet固接 E10 Netflix 动画疯", server: tw20.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E01", server: tw21.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E02", server: tw22.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E03", server: tw23.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E04", server: tw24.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E05", server: tw25.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E06", server: tw26.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E07", server: tw27.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E08", server: tw28.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E09", server: tw29.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇨🇳 中国-台湾宜兰 IPLC E10", server: tw30.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 01", server: hk21.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 02", server: hk22.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 03", server: hk23.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 04", server: hk24.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 05", server: hk25.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 06", server: hk26.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 07", server: hk27.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 08", server: hk28.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 09", server: hk29.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 10", server: hk30.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 11", server: hk31.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 12", server: hk32.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 13", server: hk33.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 14", server: hk34.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 15", server: hk35.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 16", server: hk36.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 17", server: hk37.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 18", server: hk38.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 19", server: hk39.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 20", server: hk40.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E01", server: hkt01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E02", server: hkt02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E03", server: hkt03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E04", server: hkt04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E05", server: hkt05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E06", server: hkt06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E07", server: hkt07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E08", server: hkt08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E09", server: hkt09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E10", server: hkt10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E01", server: hkbn01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E02", server: hkbn02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E03", server: hkbn03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E04", server: hkbn04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E05", server: hkbn05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E06", server: hkbn06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E07", server: hkbn07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E08", server: hkbn08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E09", server: hkbn09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}
+{name: "[SS] 🇭🇰 香港 油尖旺御金·国峯 香港寬頻 E10", server: hkbn10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}

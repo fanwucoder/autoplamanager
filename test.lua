@@ -1,0 +1,28 @@
+-- print("hello world!")
+-- function mytest(x1, x2, x3)
+--     print(x1)
+--     print(x2)
+--     print(x3)
+-- end
+-- -- mytest(1,2)
+-- MAP = {["格鲁"] = {321, 164}}
+-- SUB_MAP = {["悬空"] = {970, 272}}
+-- SUB_MAP1 = {["悬空"] = {["矿脉"] = {970, 272}}}
+-- local x= MAP["格鲁"]
+-- print(x[1])
+-- print(x[2])
+-- Unit = {Param = {}, State = {}}
+-- Unit.Param.finishPlayer = {
+--     player_areas = {
+--         {
+--             area = "赫顿城",
+--             subarea = "悬空",
+--             name = "矿脉",
+--             level = "王者",
+--             times = 999
+--         }
+--     }
+-- }
+-- local a=Unit.Param.finishPlayer.player_areas
+-- print(a[1]["area"])
+print("test\n")

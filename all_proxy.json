@@ -1,0 +1,282 @@
+{
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\", server: tw01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw01.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\", server: tw02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw02.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\", server: tw03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw03.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\", server: tw04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw04.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\", server: tw05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw05.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\", server: tw06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw06.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\", server: tw07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw07.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\", server: tw08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw08.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\", server: tw09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw09.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\", server: tw10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IEPL HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw10.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\", server: tw11.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E01 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw11.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\", server: tw12.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E02 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw12.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\", server: tw13.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E03 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw13.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\", server: tw14.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E04 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw14.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\", server: tw15.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E05 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw15.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\", server: tw16.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E06 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw16.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\", server: tw17.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E07 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw17.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\", server: tw18.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E08 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw18.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\", server: tw19.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E09 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw19.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\", server: tw20.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e IPLC HiNet\u56fa\u63a5 E10 Netflix \u52a8\u753b\u75af\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw20.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E01\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E01\", server: tw21.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E01\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw21.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E02\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E02\", server: tw22.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E02\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw22.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E03\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E03\", server: tw23.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E03\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw23.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E04\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E04\", server: tw24.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E04\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw24.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E05\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E05\", server: tw25.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E05\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw25.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E06\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E06\", server: tw26.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E06\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw26.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E07\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E07\", server: tw27.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E07\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw27.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E08\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E08\", server: tw28.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E08\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw28.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E09\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E09\", server: tw29.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E09\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw29.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E10\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E10\", server: tw30.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udde8\ud83c\uddf3 \u4e2d\u56fd-\u53f0\u6e7e\u5b9c\u5170 IPLC E10\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s tw30.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 01\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 01\", server: hk21.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 01\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk21.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 02\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 02\", server: hk22.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 02\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk22.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 03\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 03\", server: hk23.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 03\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk23.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 04\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 04\", server: hk24.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 04\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk24.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 05\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 05\", server: hk25.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 05\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk25.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 06\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 06\", server: hk26.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 06\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk26.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 07\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 07\", server: hk27.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 07\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk27.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 08\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 08\", server: hk28.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 08\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk28.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 09\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 09\", server: hk29.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 09\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk29.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 10\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 10\", server: hk30.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 10\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk30.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 11\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 11\", server: hk31.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 11\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk31.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 12\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 12\", server: hk32.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 12\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk32.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 13\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 13\", server: hk33.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 13\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk33.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 14\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 14\", server: hk34.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 14\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk34.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 15\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 15\", server: hk35.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 15\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk35.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 16\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 16\", server: hk36.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 16\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk36.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 17\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 17\", server: hk37.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 17\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk37.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 18\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 18\", server: hk38.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 18\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk38.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 19\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 19\", server: hk39.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 19\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk39.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 20\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 20\", server: hk40.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u4e2d\u56fd-\u9999\u6e2f IEPL Equinix HK2 E 20\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hk40.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E01\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E01\", server: hkt01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E01\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt01.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E02\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E02\", server: hkt02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E02\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt02.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E03\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E03\", server: hkt03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E03\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt03.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E04\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E04\", server: hkt04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E04\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt04.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E05\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E05\", server: hkt05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E05\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt05.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E06\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E06\", server: hkt06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E06\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt06.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E07\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E07\", server: hkt07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E07\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt07.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E08\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E08\", server: hkt08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E08\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt08.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E09\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E09\", server: hkt09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E09\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt09.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E10\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E10\", server: hkt10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u7db2\u4e0a\u884c\u5bec\u983b E10\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkt10.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E01\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E01\", server: hkbn01.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E01\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn01.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E02\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E02\", server: hkbn02.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E02\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn02.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E03\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E03\", server: hkbn03.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E03\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn03.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E04\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E04\", server: hkbn04.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E04\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn04.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E05\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E05\", server: hkbn05.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E05\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn05.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E06\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E06\", server: hkbn06.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E06\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn06.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E07\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E07\", server: hkbn07.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E07\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn07.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E08\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E08\", server: hkbn08.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E08\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn08.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E09\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E09\", server: hkbn09.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E09\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn09.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    },
+    "\"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E10\"": {
+        "clash": "\nproxies:\n  - {name: \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E10\", server: hkbn10.as9929.com, port: 12208, type: ss, cipher: rc4-md5, password: TMZjRm, udp: true}\nproxy-groups:\n  - name: Proxy\n    type: select\n    proxies:\n      - \"[SS] \ud83c\udded\ud83c\uddf0 \u9999\u6e2f \u6cb9\u5c16\u65fa\u5fa1\u91d1\u00b7\u56fd\u5cef \u9999\u6e2f\u5bec\u983b E10\"\nrules:\n  - 'MATCH,Proxy'\n",
+        "command": "sslocal.exe  -s hkbn10.as9929.com -p 12208 -l 10800 -m \"rc4-md5\" -k \"TMZjRm\""
+    }
+}
