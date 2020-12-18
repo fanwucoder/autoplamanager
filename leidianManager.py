@@ -1,5 +1,5 @@
 #注意，请自行导入上面的类代码，否则无法使用
-from Dnconsole import Dnconsole
+from dnconsole import Dnconsole
 import time
 if __name__ == '__main__':
     Dnconsole.launch(0)#打开模拟器
