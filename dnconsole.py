@@ -28,7 +28,7 @@ class DnPlayer(object):
         return "\nindex:%d name:%s top:%08X bind:%08X running:%s pid:%d vbox_pid:%d\n" % (
             index, name, twh, bwh, r, pid, vpid)
 class UserInfo:
-    def __init__(self,xml):
+    def __init__(self,*args,**kwargs):
         pass
 class Dnconsole:
     # 请根据自己电脑配置
