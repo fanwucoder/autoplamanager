@@ -2,6 +2,8 @@ import os
 import shutil
 import time
 import cv2 as cv
+import traceback
+import numpy as np
 
 
 class DnPlayer(object):
@@ -39,8 +41,8 @@ class UserInfo:
 
 class Dnconsole:
     # 请根据自己电脑配置
-    console = 'E:\\leidian\\LDPlayer4\\ldconsole.exe '
-    ld = 'E:\\leidian\\LDPlayer4\\ld.exe '
+    console = 'E:\\ChangZhi\\dnplayer2\\ldconsole.exe '
+    ld = 'E:\\ChangZhi\\dnplayer2\\ld.exe '
     share_path = 'C:/Users/fan/Documents/雷电模拟器/Pictures'
 
     @staticmethod
@@ -75,7 +77,7 @@ class Dnconsole:
     @staticmethod
     def dnld(index: int, command: str, silence: bool = True):
         cmd = Dnconsole.ld + '-s %d "%s"' % (index, command)
-        # print(cmd)
+        print(cmd)
         if silence:
             os.system(cmd)
             return ''
@@ -87,6 +89,7 @@ class Dnconsole:
     @staticmethod
     def adb(index: int, command: str, silence: bool = False) -> str:
         cmd = Dnconsole.console + 'adb --index %d --command "%s"' % (index, command)
+        print(cmd)
         if silence:
             os.system(cmd)
             return ''
@@ -193,9 +196,9 @@ class Dnconsole:
         x1 = coordinate_rightdown[0]
         y1 = coordinate_rightdown[1]
         if delay == 0:
-            Dnconsole.dnld(index, 'input swipe %d %d %d %d' % (x0, y0, x1, y1))
+            Dnconsole.dnld(index, ' input swipe %d %d %d %d' % (x0, y0, x1, y1))
         else:
-            Dnconsole.dnld(index, 'input swipe %d %d %d %d %d' % (x0, y0, x1, y1, delay))
+            Dnconsole.dnld(index, ' input swipe %d %d %d %d %d' % (x0, y0, x1, y1, delay))
 
     @staticmethod
     def copy(name: str, index: int = 0):
@@ -280,15 +283,20 @@ class Dnconsole:
     @staticmethod
     def find_pic(screen: str, template: str, threshold: float):
         try:
-            scr = cv.imread(screen)
-            tp = cv.imread(template)
+
+            scr = Dnconsole.cv_imread(screen)
+            tp = Dnconsole.cv_imread(template)
+            # cv.namedWindow("aaa")
+            # cv.imshow("aaa",scr)
+            # cv.imshow("aaa", tp)
             result = cv.matchTemplate(scr, tp, cv.TM_SQDIFF_NORMED)
         except cv.error:
+            traceback.print_exc()
             print('文件错误：', screen, template)
             time.sleep(1)
             try:
-                scr = cv.imread(screen)
-                tp = cv.imread(template)
+                scr = Dnconsole.cv_imread(screen)
+                tp = Dnconsole.cv_imread(template)
                 result = cv.matchTemplate(scr, tp, cv.TM_SQDIFF_NORMED)
             except cv.error:
                 return False, None
@@ -299,13 +307,21 @@ class Dnconsole:
         print(template, min_val, min_loc)
         return True, min_loc
 
+    ## 读取图像，解决imread不能读取中文路径的问题
+    @staticmethod
+    def cv_imread(filePath):
+        cv_img = cv.imdecode(np.fromfile(filePath, dtype=np.uint8), -1)
+        ## imdecode读取的是rgb，如果后续需要opencv处理的话，需要转换成bgr，转换后图片颜色会变化
+        cv_img=cv.cvtColor(cv_img,cv.COLOR_RGB2BGR)
+        return cv_img
+
     @staticmethod
     def wait_picture(index: int, timeout: int, template: str) -> bool:
         count = 0
         while count < timeout:
-            Dnconsole.dnld(index, 'screencap -p /sdcard/Pictures/apk_scr.png')
+            Dnconsole.dnld(index, 'screencap -p /sdcard/Pictures/apk_scr%d.png' % index)
             time.sleep(2)
-            ret, loc = Dnconsole.find_pic(Dnconsole.share_path + '%d/apk_scr.png' % index, template, 0.001)
+            ret, loc = Dnconsole.find_pic(Dnconsole.share_path + '/apk_scr%d.png' % index, template, 0.001)
             if ret is False:
                 print(loc)
                 time.sleep(2)
@@ -318,9 +334,9 @@ class Dnconsole:
     # 在当前屏幕查看模板列表是否存在,是返回存在的模板,如果多个存在,返回找到的第一个模板
     @staticmethod
     def check_picture(index: int, templates: list):
-        Dnconsole.dnld(index, 'screencap -p /sdcard/Pictures/apk_scr.png')
+        Dnconsole.dnld(index, 'screencap -p /sdcard/Pictures/apk_scr%d.png' % (index))
         time.sleep(1)
         for i, t in enumerate(templates):
-            ret, loc = Dnconsole.find_pic(Dnconsole.share_path + '%d/apk_scr.png' % index, t, 0.001)
+            ret, loc = Dnconsole.find_pic(Dnconsole.share_path + '/apk_scr%d.png' % index, t, 0.001)
             if ret is True:
                 return i, loc

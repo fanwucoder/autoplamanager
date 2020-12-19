@@ -6,7 +6,9 @@ from urllib.error import URLError
 from urllib.request import ProxyHandler, build_opener
 import subprocess
 import traceback
-all_proxy = None
+from Log import log
+
+all_proxy = {}
 
 
 def _load_proxy():
@@ -36,13 +38,23 @@ def test_url():
     return delay
 
 
-def get_proxy():
-    if all_proxy is None:
+def get_used():
+    with open("ss_used.txt", mode="r", encoding="utf-8") as f:
+        data = json.loads(f.read())
+    return data
+
+
+def get_proxy(account):
+    if not all_proxy:
         _load_proxy()
     chose_proxy = all_proxy.copy()
+    vpn_use = get_used()
     while True:
-
-        proxy_name = random.choice(list(chose_proxy.keys()))
+        rest = list(set(list(chose_proxy.keys())) - set(vpn_use.get("used", [])))
+        if not rest:
+            log.info("没有代理连接了")
+            return False
+        proxy_name = random.choice(rest)
         proxy = chose_proxy[proxy_name]
         s = proxy["clash"]
         command = proxy['command']
@@ -50,25 +62,25 @@ def get_proxy():
         p = subprocess.Popen(command, stdout=subprocess.PIPE,
                              stdin=subprocess.PIPE)
         print(proxy_name)
-        proxy["time"]=time.time()
+        proxy["time"] = time.time()
         try:
             delay_time = test_url()
-            proxy["delay"]=delay_time
+            proxy["delay"] = delay_time
             if delay_time < 2:
-                break
+                with open("temp/test.yaml", "w+", encoding="utf-8") as f:
+                    f.write(s)
+                return True
             del chose_proxy[proxy_name]
         except:
-            proxy["bad"]=True
+            proxy["bad"] = True
             # traceback.print_exc()
             del chose_proxy[proxy_name]
         finally:
+            log.debug("执行finally")
             p.terminate()
         time.sleep(3)
         print("end")
-        with open("test.yaml", "w+", encoding="utf-8") as f:
-            f.write(s)
-    print(proxy_name)
 
 
-get_proxy()
+get_proxy("test_account")
 # test_url()

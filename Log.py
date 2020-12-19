@@ -44,36 +44,37 @@ Example 2: Use set_logger to change settings
     # Change default log formatter
     log.set_logger(cmdfmt = '[%(levelname)s] %(message)s')
 '''
- 
+
 __author__ = "Mingo <wangbandi@gmail.com>"
 __status__ = "Development"
- 
+
 __all__ = ['set_logger', 'debug', 'info', 'warning', 'error',
            'critical', 'exception']
- 
+
 import os
 import sys
 import traceback
 import logging
 import logging.handlers
- 
+
+
 class ColoredFormatter(logging.Formatter):
     '''A colorful formatter.'''
- 
-    def __init__(self, fmt = None, datefmt = None):
+
+    def __init__(self, fmt=None, datefmt=None):
         logging.Formatter.__init__(self, fmt, datefmt)
- 
+
     def format(self, record):
         # Color escape string
-        COLOR_RED='\033[1;31m'
-        COLOR_GREEN='\033[1;32m'
-        COLOR_YELLOW='\033[1;33m'
-        COLOR_BLUE='\033[1;34m'
-        COLOR_PURPLE='\033[1;35m'
-        COLOR_CYAN='\033[1;36m'
-        COLOR_GRAY='\033[1;37m'
-        COLOR_WHITE='\033[1;38m'
-        COLOR_RESET='\033[1;0m'
+        COLOR_RED = '\033[1;31m'
+        COLOR_GREEN = '\033[1;32m'
+        COLOR_YELLOW = '\033[1;33m'
+        COLOR_BLUE = '\033[1;34m'
+        COLOR_PURPLE = '\033[1;35m'
+        COLOR_CYAN = '\033[1;36m'
+        COLOR_GRAY = '\033[1;37m'
+        COLOR_WHITE = '\033[1;38m'
+        COLOR_RESET = '\033[1;0m'
         # Define log color
         LOG_COLORS = {
             'DEBUG': '%s',
@@ -87,21 +88,22 @@ class ColoredFormatter(logging.Formatter):
         msg = logging.Formatter.format(self, record)
         return LOG_COLORS.get(level_name, '%s') % msg
 
+
 class Log():
-    def __init__(self, loggername='', filename = None, mode = 'a',
-            cmdlevel='DEBUG',
-            filelevel='INFO',
-            cmdfmt = '[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s',
-            filefmt = '[%(asctime)s] %(levelname)-8s%(message)s',
-            cmddatefmt = '%H:%M:%S',
-            filedatefmt = '%Y-%m-%d %H:%M:%S',
-            backup_count = 0, limit = 20480, when = None, colorful = False):
+    def __init__(self, loggername='', filename=None, mode='a',
+                 cmdlevel='DEBUG',
+                 filelevel='INFO',
+                 cmdfmt='[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s',
+                 filefmt='[%(asctime)s] %(levelname)-8s%(message)s',
+                 cmddatefmt='%H:%M:%S',
+                 filedatefmt='%Y-%m-%d %H:%M:%S',
+                 backup_count=0, limit=20480, when=None, colorful=False):
         self.filename = filename
         self.loggername = loggername
         if self.filename is None:
-            self.filename = getattr(sys.modules['__main__'], '__file__', 'log.py')
+            self.filename = getattr(sys.modules['__main__'], '__file__', 'Log.py')
             self.filename = os.path.basename(self.filename.replace('.py', '.log'))
-            #self.filename = os.path.join('/tmp', self.filename)
+            # self.filename = os.path.join('/tmp', self.filename)
         if not os.path.exists(os.path.abspath(os.path.dirname(self.filename))):
             os.makedirs(os.path.abspath(os.path.dirname(self.filename)))
         self.mode = mode
@@ -126,7 +128,7 @@ class Log():
             self.filefmt = '[%(asctime)s] %(levelname)-8s%(message)s'
             self.cmdfmt = '[%(asctime)s] %(levelname)-8s%(message)s'
             self.cmddatefmt = '%Y-%m-%d %H:%M:%S'
-        self.set_logger(cmdlevel = self.cmdlevel)
+        self.set_logger(cmdlevel=self.cmdlevel)
 
     def init_logger(self):
         '''Reload the logger.'''
@@ -138,7 +140,7 @@ class Log():
         self.streamhandler = None
         self.filehandler = None
         self.logger.setLevel(logging.DEBUG)
- 
+
     def add_streamhandler(self):
         '''Add a stream handler to the logger.'''
         self.streamhandler = logging.StreamHandler()
@@ -146,31 +148,31 @@ class Log():
         if self.colorful:
             formatter = ColoredFormatter(self.cmdfmt, self.cmddatefmt)
         else:
-            formatter = logging.Formatter(self.cmdfmt, self.cmddatefmt,)
+            formatter = logging.Formatter(self.cmdfmt, self.cmddatefmt, )
         self.streamhandler.setFormatter(formatter)
         self.logger.addHandler(self.streamhandler)
 
     def add_filehandler(self):
         '''Add a file handler to the logger.'''
         # Choose the filehandler based on the passed arguments
-        if self.backup_count == 0: # Use FileHandler
+        if self.backup_count == 0:  # Use FileHandler
             self.filehandler = logging.FileHandler(self.filename, self.mode)
         elif self.when is None:  # Use RotatingFileHandler
             self.filehandler = logging.handlers.RotatingFileHandler(self.filename,
-                    self.mode, self.limit, self.backup_count)
-        else: # Use TimedRotatingFileHandler
+                                                                    self.mode, self.limit, self.backup_count)
+        else:  # Use TimedRotatingFileHandler
             self.filehandler = logging.handlers.TimedRotatingFileHandler(self.filename,
-                    self.when, 1, self.backup_count)
+                                                                         self.when, 1, self.backup_count)
         self.filehandler.setLevel(self.filelevel)
-        formatter = logging.Formatter(self.filefmt, self.filedatefmt,)
+        formatter = logging.Formatter(self.filefmt, self.filedatefmt, )
         self.filehandler.setFormatter(formatter)
         self.logger.addHandler(self.filehandler)
- 
+
     def set_logger(self, **kwargs):
         '''Configure the logger.'''
-        keys = ['mode','cmdlevel','filelevel','filefmt','cmdfmt',\
-                'filedatefmt','cmddatefmt','backup_count','limit',\
-                'when','colorful']
+        keys = ['mode', 'cmdlevel', 'filelevel', 'filefmt', 'cmdfmt', \
+                'filedatefmt', 'cmddatefmt', 'backup_count', 'limit', \
+                'when', 'colorful']
         for (key, value) in kwargs.items():
             if not (key in keys):
                 return False
@@ -180,9 +182,9 @@ class Log():
         if isinstance(self.filelevel, str):
             self.filelevel = getattr(logging, self.filelevel.upper(), logging.DEBUG)
         if not "cmdfmt" in kwargs:
-            self.filefmt='[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s'
+            self.filefmt = '[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s'
             self.filedatefmt = '%Y-%m-%d %H:%M:%S'
-            self.cmdfmt='[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s'
+            self.cmdfmt = '[%(asctime)s] %(filename)s line:%(lineno)d %(levelname)-8s%(message)s'
             self.cmddatefmt = '%H:%M:%S'
             if self.cmdlevel > 10:
                 self.filefmt = '[%(asctime)s] %(levelname)-8s%(message)s'
@@ -195,7 +197,7 @@ class Log():
         self.import_log_funcs()
         return True
 
-    def addFileLog(self,log):
+    def addFileLog(self, log):
         self.logger.addHandler(log.filehandler)
         return self
 
@@ -212,3 +214,7 @@ class Log():
         for file, lineno, function, text in traceback.extract_tb(info[2]):
             self.error('%s line:%s in %s:%s' % (file, lineno, function, text))
         self.error('%s: %s' % info[:2])
+
+
+log = Log(filename='automanager.log', mode='a', cmdlevel='DEBUG',
+          filelevel='INFO', limit=1024 * 1024 * 100, backup_count=10, colorful=True)

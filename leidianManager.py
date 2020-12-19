@@ -2,34 +2,15 @@
 from dnconsole import Dnconsole
 import time
 import logging
-import log
+from Log import log
+from MNQ import MNQ
+from datetime import datetime as dt
 
-log = log.Log(filename='automanager.log', mode='a', cmdlevel='DEBUG', filelevel='INFO', limit=20480, backup_count=10,
-              colorful=True)
 
-
-class MNQ:
-    def __init__(self, console=None, *args, **kwargs):
-        """
-        :param console
-        :param args:
-        :param kwargs:
-        :return:
-        """
-        if console is None:
-            self.console = Dnconsole()
-        else:
-            self.console = console
-
-    @staticmethod
-    def start_game(index):
-        log.info("启动游戏,index:%d", index)
-        log.info("启动游戏成功,index:%d", index)
-        return True
 
 
 class AutoRunner:
-    def __init__(self, console=None, mnq=None, *args, **kwargs):
+    def __init__(self, console: Dnconsole = None, mnq: MNQ = None, *args, **kwargs):
         """
         :param max_runner number
         :param except_runner list
@@ -39,8 +20,10 @@ class AutoRunner:
         self.max_runner = kwargs.get("max_runner", 3)
         self.except_runner = kwargs.get("except_runner", [])
         self.runner = {}
+        self.stop = {}
         self.running = 0
         self.is_stop = False
+        self.last_date = dt.now()
         self.list = None
         if console is None:
             self.console = Dnconsole()
@@ -55,6 +38,7 @@ class AutoRunner:
         self.init_app_list()
         self.is_stop = False
         log.info("开始运行自动任务")
+
         while self.is_running():
             self.start_one()
             self.check_status()
@@ -73,7 +57,7 @@ class AutoRunner:
         if self.running >= self.max_runner:
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
             return
-        rest = list(set(self.list.keys()) - set(self.runner.keys()))
+        rest = list(set(self.list.keys()) - set(self.runner.keys()) - set(self.stop.keys()))
         print(rest)
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
@@ -87,22 +71,36 @@ class AutoRunner:
 
     def check_status(self):
         log.debug("check running status")
-        pass
+        for k, v in self.runner.items():
+            status = self.mnq.get_status(index=k)
+            if status == "start\n":
+                log.info("%d脚本开始运行", k)
+            elif status == "finish\n":
+                log.info("%d脚本执行完毕", k)
+                self.console.quit(k)
+                self.running -= 1
+                self.stop[k] = v
+                del self.runner[k]
+        date = dt.now()
+        if date.strftime("%Y-%m-%d") > self.last_date.strftime("%Y-%m-%d"):
+            if date.hour >= 6:
+                log.info("时间跳转%s到%s", self.last_date, date)
+                self.last_date = date
 
 
 def main():
     from dnconsole import DnPlayer
     from unittest.mock import MagicMock
-    test_list = [
-        DnPlayer([0, "测试1", 0, 0, 0, 0, 0]),
-        DnPlayer([1, "测试2", 0, 0, 0, 0, 0]),
-        DnPlayer([2, "测试3", 0, 0, 0, 0, 0]),
-        DnPlayer([3, "测试4", 0, 0, 0, 0, 0]),
-        DnPlayer([4, "测试5", 0, 0, 0, 0, 0]),
-    ]
-    Dnconsole.get_list = MagicMock(return_value=test_list)
+    # test_list = [
+    #     DnPlayer([0, "测试1", 0, 0, 0, 0, 0]),
+    #     DnPlayer([1, "测试2", 0, 0, 0, 0, 0]),
+    #     DnPlayer([2, "测试3", 0, 0, 0, 0, 0]),
+    #     DnPlayer([3, "测试4", 0, 0, 0, 0, 0]),
+    #     DnPlayer([4, "测试5", 0, 0, 0, 0, 0]),
+    # ]
+    # Dnconsole.get_list = MagicMock(return_value=test_list)
     console = Dnconsole()
-    auto_runner = AutoRunner(console=console, except_runner=[0])
+    auto_runner = AutoRunner(console=console, except_runner=[0, 1, 2, 3,4])
     auto_runner.run_app()
 
 
