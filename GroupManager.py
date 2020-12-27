@@ -41,8 +41,8 @@ class GroupManager:
         self.is_stop = False
 
     def quit(self):
-        self.is_stop=True
-        for name,ins in self._group_instance.items():
+        self.is_stop = True
+        for name, ins in self._group_instance.items():
             self.stop_group(name)
 
     def run(self):
@@ -77,6 +77,7 @@ class GroupManager:
                             "副本方式": config.get(group, "副本方式"),
                             "分解装备": config.get(group, "分解装备"),
                             "出售装备": config.get(group, "出售装备"),
+                            "clear_stop": config.getboolean(group, "clear_stop", vars={"clear_stop": "False"}),
                             "common": self.common,
                             "runner": None}
             print(group_runner)
@@ -122,7 +123,7 @@ class GroupManager:
 
     def update_groups(self):
         for k, v in self._group_runner.items():
-            runner = self.get_group(k)
+            runner = self.get_group(k)  # type:AutoRunner
             runner.update_config(k, v)
 
     def get_group(self, k):

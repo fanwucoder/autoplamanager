@@ -26,7 +26,7 @@ class AutoRunner(Thread):
         self.max_runner = kwargs.get("max_runner", 1)
         self.except_runner = kwargs.get("except_runner", [])
         self.runner = {}
-        self.stop = {}
+        self.stop_mnq = {}
         self.task_info = {
             'task': "playGamer",
             "role": [1],
@@ -42,7 +42,7 @@ class AutoRunner(Thread):
         self.last_date = dt.now()
         self._list = None
         self.mnq_path = None
-        self.script_path=None
+        self.script_path = None
         if console is None:
             self.console = XYConsole()
         else:
@@ -97,6 +97,8 @@ class AutoRunner(Thread):
                 self.script_path = config['common']['script_path']
                 self.console.set_mnq_path(self.mnq_path)
                 self.mnq.set_script_path(self.script_path)
+                if config['clear_stop']:
+                    self.clear_stop()
             except:
                 log.exception("更新模拟器配置报错")
             finally:
@@ -120,7 +122,7 @@ class AutoRunner(Thread):
         if self.running >= self.max_runner:
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
             return
-        rest = list(set(app_list.keys()) - set(self.runner.keys()) - set(self.stop.keys()))
+        rest = list(set(app_list.keys()) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
         print(rest)
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
@@ -151,7 +153,7 @@ class AutoRunner(Thread):
                 log.info("%d脚本执行完毕", k)
                 self.console.quit(k)
                 self.remove_stop(k)
-                self.stop[k] = v
+                self.stop_mnq[k] = v
 
             if not self.console.is_running(k):
                 self.remove_stop(k)
@@ -183,7 +185,7 @@ class AutoRunner(Thread):
 
     def write_config(self):
         config_name = os.path.join(".", "temp/%s_mnq.config" % self.runner_name)
-        with open(config_name, mode="w+",encoding="utf-8",newline='\n') as f:
+        with open(config_name, mode="w+", encoding="utf-8", newline='\n') as f:
             self.write_info(self.task_info, None, f)
         return config_name
 
@@ -193,13 +195,18 @@ class AutoRunner(Thread):
         for k, v in task_info.items():
             k = parent + k
             if isinstance(v, int):
-                f.write(k + "::" + str(v)+"\n")
+                f.write(k + "::" + str(v) + "\n")
             if isinstance(v, str):
-                f.write(k + "::" + v+"\n")
+                f.write(k + "::" + v + "\n")
             if isinstance(v, list):
-                f.write(k + "::" + ",".join([str(x) for x in v])+"\n")
+                f.write(k + "::" + ",".join([str(x) for x in v]) + "\n")
             if isinstance(v, dict):
                 self.write_info(v, k, f)
+
+    def clear_stop(self):
+        if self.stop_mnq:
+            for k in list(self.stop_mnq.keys()):
+                del self.stop_mnq[k]
 
 
 def main():
