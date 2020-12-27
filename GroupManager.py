@@ -122,7 +122,7 @@ class GroupManager:
             del self._group_instance[k]
 
     def update_groups(self):
-        for k, v in self._group_runner.items():
+        for k, v in list([(a, b) for a, b in self._group_runner.items()]):
             runner = self.get_group(k)  # type:AutoRunner
             runner.update_config(k, v)
 
