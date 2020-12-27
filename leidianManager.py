@@ -11,6 +11,13 @@ from datetime import datetime as dt
 from threading import Thread, Lock
 from xyconsole import XYConsole
 
+ZL_ACCOUNT = [
+    {"zl_account": "13259490164", "zl_password": "fanwu123"},
+    {"zl_account": "feiniao123", "zl_password": "feiniao123"},
+    {"zl_account": "feiniao124", "zl_password": "feiniao124"},
+    {"zl_account": "feiniao125", "zl_password": "feiniao125"}
+]
+
 
 class AutoRunner(Thread):
     def __init__(self, console: Dnconsole = None, mnq: MNQ = None, *args, **kwargs):
@@ -131,7 +138,7 @@ class AutoRunner(Thread):
 
         log.info("启动模拟器,index:%d,name:%s", task.index, task.name)
         try:
-            config_name = self.write_config()
+            config_name = self.write_config(task.index)
             if not self.mnq.start_game(task.index, task.name, config_name):
                 log.info("启动模拟器%d失败", task.index)
             else:
@@ -183,8 +190,12 @@ class AutoRunner(Thread):
                 self.runner[k.index] = k
         self.running = len(self.runner.keys())
 
-    def write_config(self):
+    def write_config(self, idx):
         config_name = os.path.join(".", "temp/%s_mnq.config" % self.runner_name)
+        pos = self.include.index(idx) % len(ZL_ACCOUNT)
+        zl = ZL_ACCOUNT[pos]
+        self.task_info["zl_account"] = zl['zl_account']
+        self.task_info['zl_password'] = zl['zl_password']
         with open(config_name, mode="w+", encoding="utf-8", newline='\n') as f:
             self.write_info(self.task_info, None, f)
         return config_name
