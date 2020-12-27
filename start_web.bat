@@ -1,1 +1,1 @@
-cmd /k start "python main.py"
+cmd /k  "python main.py"

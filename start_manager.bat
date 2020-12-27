@@ -1,1 +1,1 @@
-cmd /k start "python groupMain.py"
+cmd /k  "python groupMain.py"
