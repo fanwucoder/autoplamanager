@@ -322,3 +322,4 @@ dmypy.json
 
 .idea/
 __pycache__/dnconsole.cpython-37.pyc
+/config.ini
