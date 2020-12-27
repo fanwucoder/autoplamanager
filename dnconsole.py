@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import shutil
 import time
@@ -41,9 +42,13 @@ class UserInfo:
 
 class Dnconsole:
     # 请根据自己电脑配置
-    console = 'E:\\ChangZhi\\dnplayer2\\ldconsole.exe '
-    ld = 'E:\\ChangZhi\\dnplayer2\\ld.exe '
-    share_path = 'C:/Users/fan/Documents/雷电模拟器/Pictures'
+    basepath = "D:\\ChangZhi\\dnplayer2"
+    # basepath="E:\\ChangZhi\\dnplayer2\\"
+    console = basepath + '\\ldconsole.exe '
+    ld = basepath + '\\ld.exe '
+
+    # share_path = 'C:/Users/fan/Documents/雷电模拟器/Pictures'
+    share_path = "D:/Backup/Documents/雷电模拟器/Pictures"
 
     @staticmethod
     def get_list():
@@ -70,9 +75,10 @@ class Dnconsole:
     @staticmethod
     def is_running(index: int) -> bool:
         all = Dnconsole.get_list()
-        if index >= len(all):
-            raise IndexError('%d is not exist' % index)
-        return all[index].is_running()
+        for a in all:
+            if a.index == index:
+                return a.is_running()
+        return False
 
     @staticmethod
     def dnld(index: int, command: str, silence: bool = True):
@@ -312,7 +318,7 @@ class Dnconsole:
     def cv_imread(filePath):
         cv_img = cv.imdecode(np.fromfile(filePath, dtype=np.uint8), -1)
         ## imdecode读取的是rgb，如果后续需要opencv处理的话，需要转换成bgr，转换后图片颜色会变化
-        cv_img=cv.cvtColor(cv_img,cv.COLOR_RGB2BGR)
+        cv_img = cv.cvtColor(cv_img, cv.COLOR_RGB2BGR)
         return cv_img
 
     @staticmethod
@@ -340,3 +346,8 @@ class Dnconsole:
             ret, loc = Dnconsole.find_pic(Dnconsole.share_path + '/apk_scr%d.png' % index, t, 0.001)
             if ret is True:
                 return i, loc
+
+    def set_mnq_path(self, mnq_path):
+        Dnconsole.basepath = mnq_path
+        Dnconsole.console = Dnconsole.basepath + '\\ldconsole.exe '
+        Dnconsole.ld = Dnconsole.basepath + '\\ld.exe '

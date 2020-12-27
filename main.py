@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 from flask import request
 from PIL import Image
@@ -6,7 +7,8 @@ import base64
 from io import BytesIO
 import uuid
 import requests
-from Utils import get_ocr_data, image2gray, is_imgs_similar,get_ocr_num
+from Utils import get_ocr_data, image2gray, is_imgs_similar, get_ocr_num
+
 app = Flask(__name__)
 
 
@@ -39,6 +41,8 @@ def upload_file():
             return ret
         # print("data:image/png;base64,"+str(img_str,encoding='utf-8'))
     return ""
+
+
 @app.route('/upload1', methods=['GET', 'POST'])
 def upload_file1():
     if request.method == 'POST':
@@ -87,7 +91,7 @@ def compare_img():
         img = Image.open(f)
         img1 = img.crop((x1, y1, x2, y2))
         img1.save("res/temp.png")
-        target_fn = "res/"+target_pic[target]
+        target_fn = "res/" + target_pic[target]
         img2 = Image.open(target_fn)
         print(target_fn)
         ret = is_imgs_similar(img1, img2)
@@ -101,22 +105,28 @@ def compare_img():
 def compare_img1():
     if request.method == 'POST':
         f = request.files['ocr_file']
-        target ="res/"+ request.args.get('target', type=str)
-        img1 = Image.open("res/"+f)
+        target = "res/" + request.args.get('target', type=str)
+        img1 = Image.open("res/" + f)
         img1.save("res/temp.png")
         img2 = Image.open(target)
         ret = is_imgs_similar(img1, img2)
         print(str(ret))
         return str(ret)
     return str(False)
+
+
 @app.route('/save_img', methods=['GET', 'POST'])
 def save_img():
     if request.method == 'POST':
         f = request.files['ocr_file']
-        target ="res/"+ request.args.get('target', type=str)
+        target = "res/" + request.args.get('target', type=str)
         img1 = Image.open(f)
         img1.save(target)
         return str(True)
     return str(False)
 
+
+import os
+
+print(os.path.abspath("."))
 app.run(host='0.0.0.0')

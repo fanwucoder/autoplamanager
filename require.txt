@@ -1,2 +1,4 @@
 pip install opencv-python
 pip install PySocks
+pip install flask
+sudo pip install Pillow
