@@ -139,7 +139,11 @@ class AutoRunner(Thread):
         log.info("启动模拟器,index:%d,name:%s", task.index, task.name)
         try:
             config_name = self.write_config(task.index)
-            if not self.mnq.start_game(task.index, task.name, config_name):
+            if self.task_info['task'] == "startZL1":
+                ret = self.mnq.start_zl(task.index, self.task_info)
+            else:
+                ret = self.mnq.start_game(task.index, task.name, config_name)
+            if not ret:
                 log.info("启动模拟器%d失败", task.index)
             else:
                 self.runner[task.index] = {"task": task}
@@ -148,6 +152,7 @@ class AutoRunner(Thread):
             self.mnq.quit(task.index)
             log.exception("模拟器%d启动报错", task.index)
         self.running += 1
+        self.mnq.get_picture(task.index)
 
     def check_status(self):
         self.get_running()
@@ -192,13 +197,16 @@ class AutoRunner(Thread):
 
     def write_config(self, idx):
         config_name = os.path.join(".", "temp/%s_mnq.config" % self.runner_name)
+        self.set_zl_account(idx)
+        with open(config_name, mode="w+", encoding="utf-8", newline='\n') as f:
+            self.write_info(self.task_info, None, f)
+        return config_name
+
+    def set_zl_account(self, idx):
         pos = self.include.index(idx) % len(ZL_ACCOUNT)
         zl = ZL_ACCOUNT[pos]
         self.task_info["zl_account"] = zl['zl_account']
         self.task_info['zl_password'] = zl['zl_password']
-        with open(config_name, mode="w+", encoding="utf-8", newline='\n') as f:
-            self.write_info(self.task_info, None, f)
-        return config_name
 
     def write_info(self, task_info, parent, f):
         if not parent:

@@ -33,7 +33,7 @@ class MNQ:
         if not self.launch_mnq(index):
             return False
         time.sleep(15)
-        self.start_touch(index, name,config_name)
+        self.start_touch(index, name, config_name)
         return True
 
     def launch_mnq(self, index):
@@ -53,7 +53,80 @@ class MNQ:
 
         return False
 
-    def start_touch(self, index: int, name: str,config_name:str):
+    def start_zl(self, idx, conf):
+        # 通过adb启动紫龙脚本，自动练号
+        if not self.launch_mnq(idx):
+            return False
+        console = self.console
+
+        zl_account = conf['zl_account']
+        zl_password = conf['zl_password']
+        package = "com.aland.hsz"
+        console.stopapp(idx, package)
+        console.pressKey(idx, KEY_HOME)
+        time.sleep(5)
+
+        console.wait_picture(idx, 60 * 10, RES_ZL_LAUNCH)
+        time.sleep(1)
+        find, pos = console.check_picture(idx, [RES_ZL_LAUNCH])
+        if find is not None:
+            console.touch(idx, pos[0], pos[1])
+        console.wait_picture(idx, 60 * 10, RES_ZL_SET)
+        check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+        time.sleep(1)
+        console.touch(idx, 47, 79)
+        check_tap(console, idx, [RES_ZL_LOGOUT], [(247, 179), (353, 181)])
+        find, pos = console.check_picture(idx, [RES_ZL_LOGIN])
+        if find is not None:
+            console.touch(idx, 354, 381)
+            time.sleep(0.2)
+            for i in range(20):
+                console.pressKey(idx, KEY_DELETE)
+                time.sleep(0.2)
+
+        time.sleep(1)
+        console.inputText(idx, zl_account)
+
+        console.touch(idx, 255, 487)
+        console.inputText(idx, zl_password)
+        time.sleep(0.5)
+        console.touch(idx, 362, 660)
+        time.sleep(2)
+        console.touch(idx, 661, 561)
+
+        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(153, 594)])
+
+        time.sleep(2)
+        console.touch(idx, 243, 522)
+        time.sleep(0.5)
+        console.touch(idx, 264, 642)
+        time.sleep(0.5)
+        console.touch(idx, 471, 897)
+        time.sleep(0.5)
+        console.touch(idx, 510, 1018)
+        time.sleep(0.5)
+        console.touch(idx, 342, 1240)
+
+        time.sleep(5)
+        console.touch(idx, 414, 1095)
+        cnt = 0
+        while True:
+            find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
+            if find is not None:
+                print("找到登录")
+                console.touch(idx, 625, 420)
+                time.sleep(1)
+            find, pos = console.check_picture(idx, [RES_ZL_SS_BIND])
+            if find is not None:
+                print("找到绑定手机")
+                console.touch(idx, 881, 158)
+            time.sleep(1)
+            cnt += 1
+            if cnt > 120:
+                break
+        return True
+
+    def start_touch(self, index: int, name: str, config_name: str):
         # Dnconsole.adb(index, "kill-server",silence=False)
         # Dnconsole.adb(index, "wait-for-device",silence=False)
         # get_proxy.get_proxy(name)
@@ -79,7 +152,7 @@ class MNQ:
             # Dnconsole.touch(index, 672, xy[1] + 160)
             time.sleep(3)
             i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
-            self.console.touch(index, 672, xy[1]+5)
+            self.console.touch(index, 672, xy[1] + 5)
 
     def copyScripts(self, index):
         script_path = os.path.abspath(MNQ.script_path)
@@ -107,41 +180,38 @@ class MNQ:
     def quit(self, idx):
         self.console.quit(idx)
 
+    def get_picture(self, index):
+        self.console.make_screencap(index, "/sdcard/start_run.png")
+        self.console.get_result(index)
+
+
+RES_ZL_LAUNCH = "res/zl/zl_launch.png"
+RES_ZL_SET = "res/zl/set.png"
+RES_ZL_LOGOUT = "res/zl/logout.png"
+RES_ZL_LOGIN = "res/zl/login.png"
+RES_ZL_MAIN_TASK = "res/zl/main_task.png"
+RES_ZL_SS_LOGIN = "res/zl/ss_login.png"
+RES_ZL_SS_BIND = "res/zl/ss_bind.png"
+KEY_DELETE = 67
+KEY_HOME = 3
+
+
+def check_tap(console, idx: int, res: list, poses: list, wait: float = 0.5):
+    find, pos = console.check_picture(idx, res)
+    if find is not None:
+        for p in poses:
+            console.touch(idx, p[0], p[1])
+            time.sleep(wait)
+
 
 def main():
     pass
     XYConsole.init("D:/Program Files/Microvirt/MEmu")
     console = XYConsole()
-    # mnq = MNQ(console=console)
-    # mnq.start_game(3, "test")
-
-    # print(mnq.get_status(4) == "start\n")
-    # mnq.start_game(4)
-    # Dnconsole.
-    # Dnconsole.find_pic()
-    # MNQ.copyScripts(4)
-    index = 2
-    ret = XYConsole.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_main.png")])
-    i, xy = ret
-    XYConsole.touch(index, xy[0], xy[1])
-    time.sleep(2)
-    XYConsole.touch(index, 672, xy[1] + 10)
-    time.sleep(2)
-    i, xy = XYConsole.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
-    XYConsole.touch(index, 672, xy[1])
-    print(xy)
-
-    # print(os.path.join(os.path.abspath("."), "res/脚本开始.png"))
-    # ret = Dnconsole.wait_picture(4, 120, "res/main.png")
-
-    # ret=Dnconsole.adb(5,"input swipe 360, 100 361, 700")
-    # Dnconsole.touch(5,30,60)
-
-    # ret = Dnconsole.adb(5, "ls /sdcard/")
-    # print(ret)
-    # index = 8
-    # name = "flybird123"
-    # mnq.start_touch(index, name)
+    index = 7
+    # console.make_screencap(index, "/sdcard/start_run.png")
+    # console.dowload_file(index,"/sdcard/start_run.png","temp/start_run.png")
+    console.get_result(index)
 
 
 if __name__ == '__main__':

@@ -60,8 +60,8 @@ dalaoban4871=dalaoban4871
 dalaoban23=dalaoban23
 zhiduanda3606=zhiduanda3606
 zhiduanda1996=zhiduanda1996
-
-
+"""
+"""
 zhuandaqian3233=zhuandaqian3233
 dalaoban20=dalaoban20
 fwqkwhui7913=fwqkwhui7913
@@ -69,13 +69,15 @@ dayigui9031=dayigui9031
 haojixing2779=haojixing2779
 dalaoban3837=dalaoban3837
 """
-a1 = []
-for a in accounts1.split("\n"):
-    if a:
-        a = a.split(",")[1]
-        if "+" in a:
-            a = a[1:]
-        a1.append(a)
+import configparser
+from xyconsole import XYConsole
+
+config = configparser.ConfigParser()
+config.read("config.ini", encoding='utf-8')
+mnq_path = config.get("common", "mnq_path")
+XYConsole.init(mnq_path)
+a1 = [x.name for x in XYConsole.get_list()]
+
 a2 = []
 for x in accounts2.split("\n"):
     if x:

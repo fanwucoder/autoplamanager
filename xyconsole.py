@@ -8,6 +8,7 @@ from dnconsole import DnPlayer
 import cv2 as cv
 import numpy as np
 from Log import log
+from datetime import datetime
 
 
 class XYConsole:
@@ -69,6 +70,13 @@ class XYConsole:
         cv_img = cv.cvtColor(cv_img, cv.COLOR_RGB2BGR)
         return cv_img
 
+    @classmethod
+    def stopapp(cls, index: int, package: str):
+        cmd = cls.memuc + '  -i %d  stopapp  "%s"' % (index, package)
+        process = os.popen(cmd)
+        result = process.read()
+        process.close()
+        return result
 
     @classmethod
     def find_pic(cls, screen: str, template: str, threshold: float):
@@ -128,9 +136,18 @@ class XYConsole:
     @classmethod
     def get_screencap(cls, index):
         path = cls.share_path + "/%s.png" % index
-        cls.adb(index, ' shell screencap /sdcard/1.png')
-        cls.adb(index, 'pull /sdcard/1.png %s' % path)
+        device_path = '/sdcard/1.png'
+        cls.make_screencap(index, device_path)
+        cls.dowload_file(index, device_path, path)
         return path
+
+    @classmethod
+    def dowload_file(cls, index, device_path, path):
+        cls.adb(index, 'pull %s %s' % (device_path, path))
+
+    @classmethod
+    def make_screencap(cls, index, device_path):
+        cls.adb(index, ' shell screencap %s' % device_path)
 
     @classmethod
     def is_running(cls, index: int) -> bool:
@@ -190,6 +207,7 @@ class XYConsole:
             ret, loc = cls.find_pic(path, t, 0.001)
             if ret is True:
                 return i, loc
+        return None, None
 
     @classmethod
     def swipe(cls, index, coordinate_leftup: tuple, coordinate_rightdown: tuple, delay: int = 0):
@@ -205,6 +223,27 @@ class XYConsole:
     @classmethod
     def set_mnq_path(cls, mnq_path):
         cls.init(mnq_path)
+
+    @classmethod
+    def pressKey(cls, idx, key):
+        cls.adb(idx, " shell input keyevent %s" % key)
+
+    @classmethod
+    def inputText(cls, idx, txt):
+        cls.adb(idx, "shell input text %s" % txt)
+
+    @classmethod
+    def get_result(cls, index):
+        ret = cls.adb(index, "shell ls /sdcard/* |grep .png")
+        pictures = [x.strip() for x in ret.split("\n") if x and x.endswith(".png")]
+        if not os.path.exists("finish_result"):
+            os.makedirs("finish_result")
+        for p in pictures:
+            name = p.split("/")[-1]
+            local_path = "%s_%s_%s" % (datetime.now().strftime("%Y%m%d%H%M%S"), index, name)
+            if name.startswith("start") or name.startswith("finish"):
+                cls.dowload_file(index, p, os.path.join("finish_result", local_path))
+                cls.adb(index, "shell rm %s" % p)
 
 
 def _test():
