@@ -71,8 +71,18 @@ class MNQ:
         find, pos = console.check_picture(idx, [RES_ZL_LAUNCH])
         if find is not None:
             console.touch(idx, pos[0], pos[1])
-        console.wait_picture(idx, 60 * 10, RES_ZL_SET)
-        check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+        cnt = 600
+        while cnt > 0:
+            find, pos = console.check_picture(idx, [RES_ZL_SET])
+            if find is not None:
+                check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+            find, pos = console.check_picture(idx, [RES_ZL_SET1])
+            if find is not None:
+                break
+            cnt = cnt - 1
+            time.sleep(1)
+        if cnt <= 0:
+            return False
         time.sleep(1)
         console.touch(idx, 47, 79)
         check_tap(console, idx, [RES_ZL_LOGOUT], [(247, 179), (353, 181)])
@@ -187,6 +197,7 @@ class MNQ:
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"
 RES_ZL_SET = "res/zl/set.png"
+RES_ZL_SET1 = "res/zl/set1.png"
 RES_ZL_LOGOUT = "res/zl/logout.png"
 RES_ZL_LOGIN = "res/zl/login.png"
 RES_ZL_MAIN_TASK = "res/zl/main_task.png"
@@ -208,10 +219,26 @@ def main():
     pass
     XYConsole.init("D:/Program Files/Microvirt/MEmu")
     console = XYConsole()
-    index = 2
+    index = 7
+    idx = 7
+    mnq = MNQ(console=console)
+    cnt = 600
+    while cnt > 0:
+        find, pos = console.check_picture(idx, [RES_ZL_SET])
+        if find is not None:
+            check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+            print("关闭广告")
+            break
+        find, pos = console.check_picture(idx, [RES_ZL_SET1])
+        if find is not None:
+            print("没有广告")
+            break
+        cnt = cnt - 1
+        time.sleep(1)
     # console.make_screencap(index, "/sdcard/start_run.png")
     # console.dowload_file(index,"/sdcard/start_run.png","temp/start_run.png")
-    console.get_result(index)
+    # console.get_result(index)
+    idx = 7
 
 
 if __name__ == '__main__':
