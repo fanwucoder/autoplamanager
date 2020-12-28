@@ -208,7 +208,7 @@ def main():
     pass
     XYConsole.init("D:/Program Files/Microvirt/MEmu")
     console = XYConsole()
-    index = 7
+    index = 2
     # console.make_screencap(index, "/sdcard/start_run.png")
     # console.dowload_file(index,"/sdcard/start_run.png","temp/start_run.png")
     console.get_result(index)

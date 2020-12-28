@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import time
 
 from Log import log
@@ -37,6 +38,8 @@ class GroupManager:
 
     def init(self, config="config.ini"):
         self._config = config
+        if not os.path.exists("temp"):
+            os.makedirs("temp")
 
         self.is_stop = False
 

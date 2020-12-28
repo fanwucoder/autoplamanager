@@ -163,6 +163,7 @@ class AutoRunner(Thread):
                 log.info("%d脚本开始运行", k)
             elif status == "finish\n":
                 log.info("%d脚本执行完毕", k)
+                self.mnq.get_picture(k)
                 self.console.quit(k)
                 self.remove_stop(k)
                 self.stop_mnq[k] = v

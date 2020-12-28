@@ -240,7 +240,7 @@ class XYConsole:
             os.makedirs("finish_result")
         for p in pictures:
             name = p.split("/")[-1]
-            local_path = "%s_%s_%s" % (datetime.now().strftime("%Y%m%d%H%M%S"), index, name)
+            local_path = "%s_%s_%s" % (index, datetime.now().strftime("%Y%m%d%H%M%S"), name)
             if name.startswith("start") or name.startswith("finish"):
                 cls.dowload_file(index, p, os.path.join("finish_result", local_path))
                 cls.adb(index, "shell rm %s" % p)
