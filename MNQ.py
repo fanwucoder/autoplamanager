@@ -76,6 +76,7 @@ class MNQ:
             find, pos = console.check_picture(idx, [RES_ZL_SET])
             if find is not None:
                 check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+                break
             find, pos = console.check_picture(idx, [RES_ZL_SET1])
             if find is not None:
                 break
