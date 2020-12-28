@@ -4,7 +4,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+finish_result/*.png
 # C extensions
 *.so
 temp
