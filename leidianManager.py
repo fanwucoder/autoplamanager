@@ -145,7 +145,7 @@ class AutoRunner(Thread):
         try:
             config_name = self.write_config(task.index)
             if self.task_info['task'] == "startZL1":
-                ret = self.mnq.start_zl(task.index, self.task_info)
+                ret = self.mnq.start_zl(task.index,config_name, self.task_info)
             else:
                 ret = self.mnq.start_game(task.index, task.name, config_name)
             if not ret:

@@ -53,10 +53,11 @@ class MNQ:
 
         return False
 
-    def start_zl(self, idx, conf):
+    def start_zl(self, idx, config_name,conf):
         # 通过adb启动紫龙脚本，自动练号
         if not self.launch_mnq(idx):
             return False
+        self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
         console = self.console
 
         zl_account = conf['zl_account']
