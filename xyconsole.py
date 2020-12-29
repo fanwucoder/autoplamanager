@@ -123,7 +123,7 @@ class XYConsole:
 
             path = cls.get_screencap(index)
             time.sleep(2)
-            ret, loc = cls.find_pic(path, template, 0.001)
+            ret, loc = cls.find_pic(path, template, 0.01)
             if ret is False:
                 print(loc)
                 time.sleep(2)
@@ -204,7 +204,7 @@ class XYConsole:
         path = cls.get_screencap(index)
         time.sleep(1)
         for i, t in enumerate(templates):
-            ret, loc = cls.find_pic(path, t, 0.001)
+            ret, loc = cls.find_pic(path, t, 0.01)
             if ret is True:
                 return i, loc
         return None, None

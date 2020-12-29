@@ -75,8 +75,7 @@ class MNQ:
         while cnt > 0:
             find, pos = console.check_picture(idx, [RES_ZL_SET])
             if find is not None:
-                check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
-                break
+                console.pressKey(idx, KEY_BACK)
             find, pos = console.check_picture(idx, [RES_ZL_SET1])
             if find is not None:
                 break
@@ -85,11 +84,11 @@ class MNQ:
         if cnt <= 0:
             return False
         time.sleep(1)
-        console.touch(idx, 47, 79)
-        check_tap(console, idx, [RES_ZL_LOGOUT], [(247, 179), (353, 181)])
+        console.touch(idx, 65, 107)
+        check_tap(console, idx, [RES_ZL_LOGOUT], [(234, 235), (373, 232)])
         find, pos = console.check_picture(idx, [RES_ZL_LOGIN])
         if find is not None:
-            console.touch(idx, 354, 381)
+            console.touch(idx, 452, 516)
             time.sleep(0.2)
             for i in range(20):
                 console.pressKey(idx, KEY_DELETE)
@@ -98,28 +97,30 @@ class MNQ:
         time.sleep(1)
         console.inputText(idx, zl_account)
 
-        console.touch(idx, 255, 487)
+        console.touch(idx, 271, 651)
         console.inputText(idx, zl_password)
         time.sleep(0.5)
-        console.touch(idx, 362, 660)
+        console.touch(idx, 357, 889)
         time.sleep(2)
-        console.touch(idx, 661, 561)
+        console.touch(idx, 686, 510)
 
-        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(153, 594)])
+        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(85, 793)])
 
         time.sleep(2)
-        console.touch(idx, 243, 522)
+        console.touch(idx, 206, 700)
         time.sleep(0.5)
-        console.touch(idx, 264, 642)
+        console.touch(idx, 214, 228)
         time.sleep(0.5)
-        console.touch(idx, 471, 897)
+        console.touch(idx, 264, 193)
         time.sleep(0.5)
-        console.touch(idx, 510, 1018)
+        console.touch(idx, 537, 593)
         time.sleep(0.5)
-        console.touch(idx, 342, 1240)
+        console.touch(idx, 540, 652)
+        time.sleep(0.5)
+        console.touch(idx, 368, 1230)
 
         time.sleep(5)
-        console.touch(idx, 414, 1095)
+        console.touch(idx, 430, 1094)
         cnt = 0
         while True:
             find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
@@ -206,7 +207,7 @@ RES_ZL_SS_LOGIN = "res/zl/ss_login.png"
 RES_ZL_SS_BIND = "res/zl/ss_bind.png"
 KEY_DELETE = 67
 KEY_HOME = 3
-
+KEY_BACK=4
 
 def check_tap(console, idx: int, res: list, poses: list, wait: float = 0.5):
     find, pos = console.check_picture(idx, res)

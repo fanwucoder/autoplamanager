@@ -148,8 +148,8 @@ class AutoRunner(Thread):
             else:
                 self.runner[task.index] = {"task": task}
         except:
-            # self.stop[task.index] = task
-            self.mnq.quit(task.index)
+            self.stop[task.index] = task
+            # self.mnq.quit(task.index)
             log.exception("模拟器%d启动报错", task.index)
         self.running += 1
         self.mnq.get_picture(task.index)
