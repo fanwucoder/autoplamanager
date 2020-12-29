@@ -183,7 +183,7 @@ class AutoRunner(Thread):
             if date.hour >= 6:
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
-
+        log.info("账号使用情况:%s",account_use)
     def remove_stop(self, k):
         self.running -= 1
         if k in self.runner:
