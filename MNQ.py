@@ -196,6 +196,17 @@ class MNQ:
         self.console.make_screencap(index, "/sdcard/start_run.png")
         self.console.get_result(index)
 
+    def get_zl_account(self, idx):
+        self.console.adb(idx, "pull %s %s" % (MNQ.device_path + "/res/" + "run_config.txt", "temp/account_info.txt"))
+        if os.path.exists("temp/account_info.txt"):
+            with open("temp/account_info.txt", encoding="utf-8", mode='r', newline="\n") as f:
+                for line in f.readlines():
+                    if line.startswith("zl_account"):
+                        account = line.split("::")[1]
+                        account = account.strip()
+                        return account
+        return None
+
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"
 RES_ZL_SET = "res/zl/set.png"
@@ -207,7 +218,8 @@ RES_ZL_SS_LOGIN = "res/zl/ss_login.png"
 RES_ZL_SS_BIND = "res/zl/ss_bind.png"
 KEY_DELETE = 67
 KEY_HOME = 3
-KEY_BACK=4
+KEY_BACK = 4
+
 
 def check_tap(console, idx: int, res: list, poses: list, wait: float = 0.5):
     find, pos = console.check_picture(idx, res)

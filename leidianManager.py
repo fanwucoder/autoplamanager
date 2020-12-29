@@ -11,12 +11,15 @@ from datetime import datetime as dt
 from threading import Thread, Lock
 from xyconsole import XYConsole
 
-ZL_ACCOUNT = [
-    {"zl_account": "13259490164", "zl_password": "fanwu123"},
-    {"zl_account": "feiniao123", "zl_password": "feiniao123"},
-    {"zl_account": "feiniao124", "zl_password": "feiniao124"},
-    {"zl_account": "feiniao125", "zl_password": "feiniao125"}
-]
+ZL_ACCOUNT = {
+    "13259490164": "fanwu123",
+    "feiniao123": "feiniao123",
+    "feiniao124": "feiniao124",
+    "feiniao125": "feiniao125"
+}
+account_use = {
+
+}
 
 
 class AutoRunner(Thread):
@@ -70,8 +73,8 @@ class AutoRunner(Thread):
         while self.is_running():
             if self._lock.acquire(True, timeout=100):
                 try:
-                    self.start_one()
                     self.check_status()
+                    self.start_one()
                 except:
                     log.exception("运行出错了")
                 finally:
@@ -135,7 +138,9 @@ class AutoRunner(Thread):
             log.debug("没有剩余的任务了")
             return
         task = app_list[rest[0]]
-
+        # 忽略已经运行的模拟器
+        if self.console.is_running(task.index):
+            return
         log.info("启动模拟器,index:%d,name:%s", task.index, task.name)
         try:
             config_name = self.write_config(task.index)
@@ -156,6 +161,7 @@ class AutoRunner(Thread):
 
     def check_status(self):
         self.get_running()
+        account_use.clear()
         log.debug("check running status")
         for k, v in list(self.runner.items()):
             status = self.mnq.get_status(index=k)
@@ -167,7 +173,9 @@ class AutoRunner(Thread):
                 self.console.quit(k)
                 self.remove_stop(k)
                 self.stop_mnq[k] = v
-
+            # 实时记录账号使用
+            account = self.mnq.get_zl_account(k)
+            account_use[account] = k
             if not self.console.is_running(k):
                 self.remove_stop(k)
         date = dt.now()
@@ -204,10 +212,14 @@ class AutoRunner(Thread):
         return config_name
 
     def set_zl_account(self, idx):
-        pos = self.include.index(idx) % len(ZL_ACCOUNT)
-        zl = ZL_ACCOUNT[pos]
-        self.task_info["zl_account"] = zl['zl_account']
-        self.task_info['zl_password'] = zl['zl_password']
+        ret = list(set(ZL_ACCOUNT.keys()) - set(account_use.keys()))
+        if len(ret) > 0:
+            self.task_info["zl_account"] = ret[0]
+            self.task_info['zl_password'] = ZL_ACCOUNT[ret[0]]
+        else:
+            self.task_info["zl_account"] = ""
+            self.task_info['zl_password'] = ""
+        return None
 
     def write_info(self, task_info, parent, f):
         if not parent:
