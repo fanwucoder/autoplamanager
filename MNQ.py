@@ -53,10 +53,11 @@ class MNQ:
 
         return False
 
-    def start_zl(self, idx, conf):
+    def start_zl(self, idx, config_name,conf):
         # 通过adb启动紫龙脚本，自动练号
         if not self.launch_mnq(idx):
             return False
+        self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
         console = self.console
 
         zl_account = conf['zl_account']
@@ -75,8 +76,7 @@ class MNQ:
         while cnt > 0:
             find, pos = console.check_picture(idx, [RES_ZL_SET])
             if find is not None:
-                check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
-                break
+                console.pressKey(idx, KEY_BACK)
             find, pos = console.check_picture(idx, [RES_ZL_SET1])
             if find is not None:
                 break
@@ -85,11 +85,11 @@ class MNQ:
         if cnt <= 0:
             return False
         time.sleep(1)
-        console.touch(idx, 47, 79)
-        check_tap(console, idx, [RES_ZL_LOGOUT], [(247, 179), (353, 181)])
+        console.touch(idx, 65, 107)
+        check_tap(console, idx, [RES_ZL_LOGOUT], [(234, 235), (373, 232)])
         find, pos = console.check_picture(idx, [RES_ZL_LOGIN])
         if find is not None:
-            console.touch(idx, 354, 381)
+            console.touch(idx, 452, 516)
             time.sleep(0.2)
             for i in range(20):
                 console.pressKey(idx, KEY_DELETE)
@@ -98,28 +98,30 @@ class MNQ:
         time.sleep(1)
         console.inputText(idx, zl_account)
 
-        console.touch(idx, 255, 487)
+        console.touch(idx, 271, 651)
         console.inputText(idx, zl_password)
         time.sleep(0.5)
-        console.touch(idx, 362, 660)
+        console.touch(idx, 357, 889)
         time.sleep(2)
-        console.touch(idx, 661, 561)
+        console.touch(idx, 686, 510)
 
-        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(153, 594)])
+        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(85, 793)])
 
         time.sleep(2)
-        console.touch(idx, 243, 522)
+        console.touch(idx, 206, 700)
         time.sleep(0.5)
-        console.touch(idx, 264, 642)
+        console.touch(idx, 214, 228)
         time.sleep(0.5)
-        console.touch(idx, 471, 897)
+        console.touch(idx, 264, 193)
         time.sleep(0.5)
-        console.touch(idx, 510, 1018)
+        console.touch(idx, 537, 593)
         time.sleep(0.5)
-        console.touch(idx, 342, 1240)
+        console.touch(idx, 540, 652)
+        time.sleep(0.5)
+        console.touch(idx, 368, 1230)
 
         time.sleep(5)
-        console.touch(idx, 414, 1095)
+        console.touch(idx, 430, 1094)
         cnt = 0
         while True:
             find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
@@ -195,6 +197,17 @@ class MNQ:
         self.console.make_screencap(index, "/sdcard/start_run.png")
         self.console.get_result(index)
 
+    def get_zl_account(self, idx):
+        self.console.adb(idx, "pull %s %s" % (MNQ.device_path + "/res/" + "run_config.txt", "temp/account_info.txt"))
+        if os.path.exists("temp/account_info.txt"):
+            with open("temp/account_info.txt", encoding="utf-8", mode='r', newline="\n") as f:
+                for line in f.readlines():
+                    if line.startswith("zl_account"):
+                        account = line.split("::")[1]
+                        account = account.strip()
+                        return account
+        return None
+
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"
 RES_ZL_SET = "res/zl/set.png"
@@ -206,6 +219,7 @@ RES_ZL_SS_LOGIN = "res/zl/ss_login.png"
 RES_ZL_SS_BIND = "res/zl/ss_bind.png"
 KEY_DELETE = 67
 KEY_HOME = 3
+KEY_BACK = 4
 
 
 def check_tap(console, idx: int, res: list, poses: list, wait: float = 0.5):
