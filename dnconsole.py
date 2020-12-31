@@ -17,6 +17,8 @@ class DnPlayer(object):
         self.bind_win_handler = int(info[3])
         self.is_in_android = True if int(info[4]) == 1 else False
         self.pid = int(info[5])
+        self.img=None
+        self.last_img=None
         self.vbox_pid = int(info[6])
 
     def is_running(self) -> bool:

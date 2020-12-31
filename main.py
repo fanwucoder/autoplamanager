@@ -1,22 +1,82 @@
 # -*- coding: utf-8 -*-
-from flask import Flask
+from flask import Flask,Response,send_from_directory
 from flask import request
 from PIL import Image
 import time
 import base64
 from io import BytesIO
 import uuid
+import json
+from datetime import datetime as dt
 import requests
 from Utils import get_ocr_data, image2gray, is_imgs_similar, get_ocr_num
-
+from GroupManager import GroupManager
+manager=GroupManager()
+manager.init()
+mnq_op=manager.get_operate()
 app = Flask(__name__)
 
+
+@app.after_request
+def cors(environ):
+    environ.headers['Access-Control-Allow-Origin']='*'
+    environ.headers['Access-Control-Allow-Method']='*'
+    environ.headers['Access-Control-Allow-Headers']='x-requested-with,content-type'
+    return environ
+@app.route('/finish_result/<path:filename>')
+def custom_static(filename):
+    return send_from_directory("finish_result", filename)
 
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
-
-
+json_default=lambda obj: obj.__dict__
+def get_last_image(idx):
+    imgs=get_mnq_imgs(idx,"20201230")
+    imgs=[x for x in imgs if x.endswith("start_run.png")]
+    # print(imgs)
+    sorted(imgs)
+    if len(imgs)>0:
+        return "http://localhost:5000/"+imgs[-1].replace("\\","/")
+    return None
+def get_mnq_imgs(idx,date=None):
+    if date is None:
+        date=dt.now().strftime("%Y%m%d")
+    path="finish_result"
+    pre="%d_%s"%(idx,date)
+    names=[]
+    for f in os.listdir(path):
+        if f.startswith(pre):
+            fpath=os.path.join(path,f)
+            names.append(fpath.replace("\\","/"))
+    return names
+def get_crop_imgs(idx,date=None):
+    imgs=["http://localhost:5000/"+x for x in get_crop_file(idx,date) if "game" in x]
+    imgs=sorted(imgs)
+    return imgs
+def get_crop_file(idx,date=None):
+    if date is None:
+        date=dt.now().strftime("%Y%m%d")
+    path="finish_result"
+    pre="crop_%d_%s"%(idx,date)
+    names=[]
+    for f in os.listdir(path):
+        if f.startswith(pre):
+            fpath=os.path.join(path,f)
+            names.append(fpath.replace("\\","/"))
+    return names
+@app.route("/list")
+def list_mnq():
+    import random
+    from dnconsole import DnPlayer
+    datas=[]
+    for i in range(20):
+        data=[i,"name"+str(i),0,0,random.randint(0,2),0,0]
+        status=DnPlayer(data)
+        status.last_img=get_last_image(status.index)
+        status.img=get_crop_imgs(status.index,"20201230")
+        datas.append(status)
+    return  Response(json.dumps(datas,default=json_default), mimetype='application/json')
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
