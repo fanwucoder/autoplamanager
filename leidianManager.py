@@ -36,6 +36,7 @@ class AutoRunner(Thread):
         self.max_runner = kwargs.get("max_runner", 1)
         self.except_runner = kwargs.get("except_runner", [])
         self.runner = {}
+        self.account_use ={}
         self.stop_mnq = {}
         self.task_info = {
             'task': "playGamer",
@@ -161,7 +162,7 @@ class AutoRunner(Thread):
 
     def check_status(self):
         self.get_running()
-        account_use.clear()
+        self.account_use.clear()
         log.debug("check running status")
         for k, v in list(self.runner.items()):
             status = self.mnq.get_status(index=k)
@@ -175,7 +176,7 @@ class AutoRunner(Thread):
                 self.stop_mnq[k] = v
             # 实时记录账号使用
             account = self.mnq.get_zl_account(k)
-            account_use[account] = k
+            self.account_use[account] = k
             if not self.console.is_running(k):
                 self.remove_stop(k)
         date = dt.now()
@@ -183,7 +184,7 @@ class AutoRunner(Thread):
             if date.hour >= 6:
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
-        log.info("账号使用情况:%s",account_use)
+        log.info("账号使用情况:%s",self.account_use)
     def remove_stop(self, k):
         self.running -= 1
         if k in self.runner:
@@ -212,7 +213,7 @@ class AutoRunner(Thread):
         return config_name
 
     def set_zl_account(self, idx):
-        ret = list(set(ZL_ACCOUNT.keys()) - set(account_use.keys()))
+        ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
         if len(ret) > 0:
             self.task_info["zl_account"] = ret[0]
             self.task_info['zl_password'] = ZL_ACCOUNT[ret[0]]

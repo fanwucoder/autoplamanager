@@ -58,6 +58,7 @@ class MNQ:
         if not self.launch_mnq(idx):
             return False
         self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
+        self.console.adb(idx, "shell echo >/sdcard/touch_status.txt ")
         console = self.console
 
         zl_account = conf['zl_account']

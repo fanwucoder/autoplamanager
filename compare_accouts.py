@@ -76,7 +76,16 @@ config = configparser.ConfigParser()
 config.read("config.ini", encoding='utf-8')
 mnq_path = config.get("common", "mnq_path")
 XYConsole.init(mnq_path)
-a1 = [x.name for x in XYConsole.get_list()]
+a1 = [ ]
+for x in XYConsole.get_list():
+    x=x.name
+    if "-" in x:
+        x=x.split('-')[1]
+    if "+" in x:
+        x=x[1:]
+    if "-" in x:
+        x=x[1:]
+    a1.append(x)
 
 a2 = []
 for x in accounts2.split("\n"):
