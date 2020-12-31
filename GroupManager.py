@@ -133,10 +133,12 @@ class GroupManager:
     def get_group(self, k):
         runner = self._group_instance.get(k, None)
         return runner
+
     def get_operate(self):
-        op=xyconsole.XYConsole()
+        op = xyconsole.XYConsole()
         self.update_config()
-        for k ,v in self._group_runner.items():
+        for k, v in self._group_runner.items():
             print(v)
             op.init(v["common"]['mnq_path'])
             return op
+

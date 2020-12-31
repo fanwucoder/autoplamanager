@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 # 注意，请自行导入上面的类代码，否则无法使用
 import os
-
-from dnconsole import Dnconsole
 import time
-import logging
-from Log import log
-from MNQ import MNQ
 from datetime import datetime as dt
 from threading import Thread, Lock
+
+from Log import log
+from MNQ import MNQ
+from dnconsole import Dnconsole
 from xyconsole import XYConsole
 
 ZL_ACCOUNT = {
     "13259490164": "fanwu123",
-    "feiniao123": "feiniao123",
-    "feiniao124": "feiniao124",
-    "feiniao125": "feiniao125"
+    # "feiniao123": "feiniao123",
+    # "feiniao124": "feiniao124",
+    # "feiniao125": "feiniao125"
 }
 account_use = {
 
@@ -23,20 +22,20 @@ account_use = {
 
 
 class AutoRunner(Thread):
-    def __init__(self, console: Dnconsole = None, mnq: MNQ = None, *args, **kwargs):
+    def __init__(self, console: Dnconsole = None, *args, **kwargs):
         """
         :param max_runner number
         :param except_runner list
         :param args:
         :param kwargs:
         """
-        super().__init__()
+        super().__init__(*args, **kwargs)
         self._lock = Lock()
         self.include = kwargs.get("include", [])
         self.max_runner = kwargs.get("max_runner", 1)
         self.except_runner = kwargs.get("except_runner", [])
         self.runner = {}
-        self.account_use ={}
+        self.account_use = {}
         self.stop_mnq = {}
         self.task_info = {
             'task': "playGamer",
@@ -58,16 +57,12 @@ class AutoRunner(Thread):
             self.console = XYConsole()
         else:
             self.console = console
-        if mnq is None:
-            self.mnq = MNQ(console=self.console)
-        else:
-            self.mnq = mnq
 
     def run(self) -> None:
         self.run_app()
 
     def run_app(self):
-        self.get_app_list()
+
         self.is_stop = False
         log.info("开始运行自动任务")
 
@@ -83,8 +78,8 @@ class AutoRunner(Thread):
             time.sleep(10)
 
     def stop(self):
-        for r in self.runner.keys():
-            self.mnq.quit(r)
+        for k, mnq in self.runner:
+            mnq.quit()
         self.is_stop = True
 
     def update_config(self, name, config):
@@ -107,84 +102,77 @@ class AutoRunner(Thread):
                 self.mnq_path = config['common']['mnq_path']
                 self.script_path = config['common']['script_path']
                 self.console.set_mnq_path(self.mnq_path)
-                self.mnq.set_script_path(self.script_path)
+                self.update_scripts(self.script_path)
+
                 if config['clear_stop']:
                     self.clear_stop()
             except:
                 log.exception("更新模拟器配置报错")
             finally:
-
                 self._lock.release()
-            # self.
-
-    def get_app_list(self):
-        self._list = {}
-        for x in self.console.get_list():
-            if self.check_runner(x.index, x.name):
-                self._list[x.index] = x
-        return self._list
 
     def is_running(self):
         return not self.is_stop
 
     def start_one(self):
-        app_list = self.get_app_list()
-
+        app_list = self.include
         if self.running >= self.max_runner:
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
             return
-        rest = list(set(app_list.keys()) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
-        print(rest)
+        rest = list(set(app_list) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
             return
-        task = app_list[rest[0]]
+        idx = rest[0]
+        config_name = self.write_config(idx)
+        mnq = self.runner.setdefault(idx, MNQ(idx, config_name=config_name, runner=self, console=self.console))
+
         # 忽略已经运行的模拟器
-        if self.console.is_running(task.index):
+        if mnq.is_running():
+            log.info("index:%d,name:%s已经开始运行了", mnq.idx, mnq.name)
             return
-        log.info("启动模拟器,index:%d,name:%s", task.index, task.name)
+        log.info("开始启动模拟器,index:%d,name:%s", mnq.idx, mnq.name)
         try:
-            config_name = self.write_config(task.index)
-            if self.task_info['task'] == "startZL1":
-                ret = self.mnq.start_zl(task.index,config_name, self.task_info)
-            else:
-                ret = self.mnq.start_game(task.index, task.name, config_name)
-            if not ret:
-                log.info("启动模拟器%d失败", task.index)
-            else:
-                self.runner[task.index] = {"task": task}
+
+            mnq.launch()
+            mnq.get_picture()
+            self.running += 1
         except:
-            self.stop[task.index] = task
             # self.mnq.quit(task.index)
-            log.exception("模拟器%d启动报错", task.index)
-        self.running += 1
-        self.mnq.get_picture(task.index)
+            log.exception("模拟器%d启动报错", mnq.idx)
 
     def check_status(self):
-        self.get_running()
+
         self.account_use.clear()
+        self.running = 0
         log.debug("check running status")
-        for k, v in list(self.runner.items()):
-            status = self.mnq.get_status(index=k)
-            if status == "start\n":
-                log.info("%d脚本开始运行", k)
-            elif status == "finish\n":
-                log.info("%d脚本执行完毕", k)
-                self.mnq.get_picture(k)
-                self.console.quit(k)
+        for k, mnq in list(self.runner.items()):
+            if mnq.is_running():
+                self.running += 1
+                # 实时记录账号使用
+                if mnq.get_task_type() == "zl":
+                    account = mnq.get_zl_account()
+                    self.account_use[account] = k
+                status = mnq.get_status()
+                if status == "start\n":
+                    log.info("%d脚本开始运行", k)
+                elif status == "finish\n":
+                    log.info("%d脚本执行完毕", k)
+                    mnq.get_picture()
+                    mnq.quit()
+                    self.remove_stop(k)
+                    self.stop_mnq[k] = mnq
+
+            else:
                 self.remove_stop(k)
-                self.stop_mnq[k] = v
-            # 实时记录账号使用
-            account = self.mnq.get_zl_account(k)
-            self.account_use[account] = k
-            if not self.console.is_running(k):
-                self.remove_stop(k)
+
         date = dt.now()
         if date.strftime("%Y-%m-%d") > self.last_date.strftime("%Y-%m-%d"):
             if date.hour >= 6:
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
-        log.info("账号使用情况:%s",self.account_use)
+        log.info("账号使用情况:%s", self.account_use)
+
     def remove_stop(self, k):
         self.running -= 1
         if k in self.runner:
@@ -198,21 +186,14 @@ class AutoRunner(Thread):
             return True
         return False
 
-    def get_running(self):
-        self.runner = {}
-        for k in self.console.list_running():
-            if self.check_runner(k.index, k.name):
-                self.runner[k.index] = k
-        self.running = len(self.runner.keys())
-
     def write_config(self, idx):
         config_name = os.path.join(".", "temp/%s_mnq.config" % self.runner_name)
-        self.set_zl_account(idx)
+        self.set_zl_account()
         with open(config_name, mode="w+", encoding="utf-8", newline='\n') as f:
             self.write_info(self.task_info, None, f)
         return config_name
 
-    def set_zl_account(self, idx):
+    def set_zl_account(self):
         ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
         if len(ret) > 0:
             self.task_info["zl_account"] = ret[0]
@@ -241,10 +222,30 @@ class AutoRunner(Thread):
             for k in list(self.stop_mnq.keys()):
                 del self.stop_mnq[k]
 
+    def update_scripts(self, script_path):
+        for k, mnq in self.runner.items():
+            mnq.set_script_path(script_path)
+
+    def has_zl(self):
+        ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
+        return len(ret) > 0
+
+    def get_task(self):
+        # self.get
+        self.set_zl_account()
+        if self.has_zl():
+            return "zl"
+        return "auto"
+
+    def get_zl_account(self):
+        self.set_zl_account()
+        return {
+            "zl_account": self.task_info["zl_account"],
+            'zl_password': self.task_info["zl_password"],
+        }
+
 
 def main():
-    from dnconsole import DnPlayer
-    from unittest.mock import MagicMock
     # test_list = [
     #     DnPlayer([0, "测试1", 0, 0, 0, 0, 0]),
     #     DnPlayer([1, "测试2", 0, 0, 0, 0, 0]),

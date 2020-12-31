@@ -11,25 +11,43 @@ from xyconsole import XYConsole
 
 
 class MNQ:
-    script_path = "scripts"
+    # script_path = "scripts"
     # script_path = "C:/Users/fan/Documents/TSStudio/Projects/autoplay"
     device_path = "/sdcard/TouchSprite"
 
     # XYConsole
-    def __init__(self, console: Union[Dnconsole, XYConsole] = None, *args, **kwargs):
+    def __init__(self, idx: int, config_name: str, console: Union[Dnconsole, XYConsole] = None, runner=None, *args,
+                 **kwargs):
         """
         :param console
         :param args:
         :param kwargs:
         :return:
         """
+        self.idx = idx
+        self.script_path = "scripts"
+        self.runner = runner
+        # self.device_path = "/sdcard/TouchSprite"
+        my_config_name = config_name + "%d_t" % self.idx
+        with open(config_name, mode="r", encoding="utf-8", newline="\n") as f:
+            with open(my_config_name, mode="w+", encoding="utf-8", newline="\n") as f1:
+                f1.write(f.read())
+        self.config_name = my_config_name
 
         if console is None:
             self.console = Dnconsole()
         else:
             self.console = console
+        self.dnplayer = self.console.get_dnplayer(idx)
 
-    def start_game(self, index: int, name: str, config_name: str):
+    @property
+    def name(self):
+        return self.dnplayer.name
+
+    def start_game(self):
+        index = self.idx
+        name = self.name
+        config_name = self.config_name
         if not self.launch_mnq(index):
             return False
         time.sleep(15)
@@ -53,12 +71,15 @@ class MNQ:
 
         return False
 
-    def start_zl(self, idx, config_name,conf):
+    def start_zl(self, conf):
+        idx = self.idx
+        config_name = self.config_name
         # 通过adb启动紫龙脚本，自动练号
         if not self.launch_mnq(idx):
             return False
         self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
         self.console.adb(idx, "shell echo >/sdcard/touch_status.txt ")
+        self.console.adb(idx, "shell echo zl >/sdcard/task_info.txt ")
         console = self.console
 
         zl_account = conf['zl_account']
@@ -136,7 +157,7 @@ class MNQ:
                 console.touch(idx, 881, 158)
             time.sleep(1)
             cnt += 1
-            if cnt > 120:
+            if cnt > 30:
                 break
         return True
 
@@ -149,6 +170,7 @@ class MNQ:
         self.console.adb(index, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
         self.console.adb(index, "push %s %s" % ("temp/test.yaml", "/sdcard/wwww_clash.yaml"))
         self.console.adb(index, "shell echo >/sdcard/touch_status.txt ")
+        self.console.adb(index, "shell echo zl >/sdcard/task_info.txt ")
         self.console.invokeapp(index, "com.touchsprite.android")
         self.console.wait_activity(index, "com.touchsprite.android/.activity.MainActivity", 120)
         self.console.swipe(index, (100, 300), (100, 700))
@@ -169,7 +191,7 @@ class MNQ:
             self.console.touch(index, 672, xy[1] + 5)
 
     def copyScripts(self, index):
-        script_path = os.path.abspath(MNQ.script_path)
+        script_path = os.path.abspath(self.script_path)
         for f in os.listdir(script_path):
             path = os.path.join(script_path, f)
             if f.endswith("lua"):
@@ -179,27 +201,27 @@ class MNQ:
                 self.console.adb(index, "shell rm %s" % (MNQ.device_path + "/res/" + f))
                 self.console.adb(index, "push %s %s" % (path, MNQ.device_path + "/res/" + f))
 
-    @staticmethod
-    def set_script_path(script_path):
-        MNQ.script_path = script_path
+    def set_script_path(self, script_path):
+        self.script_path = script_path
 
-    def get_status(self, index):
-        self.console.adb(index, "pull %s %s" % ("/sdcard/touch_status.txt", "temp/touch_status.txt"))
+    def get_status(self):
+        self.console.adb(self.idx, "pull %s %s" % ("/sdcard/touch_status.txt", "temp/touch_status.txt"))
         with open("temp/touch_status.txt", mode='r') as f:
             lines = f.readlines()
             if len(lines) == 0:
                 return None
             return lines[-1]
 
-    def quit(self, idx):
-        self.console.quit(idx)
+    def quit(self):
+        self.console.quit(self.idx)
 
-    def get_picture(self, index):
-        self.console.make_screencap(index, "/sdcard/start_run.png")
-        self.console.get_result(index)
+    def get_picture(self, ):
+        self.console.make_screencap(self.idx, "/sdcard/start_run.png")
+        self.console.get_result(self.idx)
 
-    def get_zl_account(self, idx):
-        self.console.adb(idx, "pull %s %s" % (MNQ.device_path + "/res/" + "run_config.txt", "temp/account_info.txt"))
+    def get_zl_account(self):
+        self.console.adb(self.idx,
+                         "pull %s %s" % (MNQ.device_path + "/res/" + "run_config.txt", "temp/account_info.txt"))
         if os.path.exists("temp/account_info.txt"):
             with open("temp/account_info.txt", encoding="utf-8", mode='r', newline="\n") as f:
                 for line in f.readlines():
@@ -208,6 +230,27 @@ class MNQ:
                         account = account.strip()
                         return account
         return None
+
+    def is_running(self):
+        return self.console.is_running(self.idx)
+
+    def get_task_type(self):
+        try:
+            self.console.adb(self.idx, "pull %s %s" % ("/sdcard/" + "task_info.txt", "temp/task_info.txt"))
+            with open("temp/task_info.txt", encoding="utf-8", mode='r', newline="\n") as f:
+                task_type = f.readlines()[-1]
+                task_type = task_type.strip()
+                return task_type
+        except:
+            return None
+
+    def launch(self):
+        task = self.runner.get_task()
+        if task == "zl":
+            zl_account = self.runner.get_zl_account()
+            self.start_zl(zl_account)
+        else:
+            self.start_game()
 
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"

@@ -142,6 +142,14 @@ class XYConsole:
         return path
 
     @classmethod
+    def get_dnplayer(cls, idx):
+        vm_list = cls.get_list()
+        for x in vm_list:
+            if x.index == idx:
+                return x
+        return None
+
+    @classmethod
     def dowload_file(cls, index, device_path, path):
         cls.adb(index, 'pull %s %s' % (device_path, path))
 
