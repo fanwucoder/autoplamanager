@@ -1,0 +1,1 @@
+forfiles /p %~dp0 /s /m *.png /d -1 /c "cmd /c del @path"
