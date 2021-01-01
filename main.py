@@ -253,7 +253,7 @@ def get_last_img():
 @app.route('/api/history_pic', methods=['GET', 'POST'])
 def history_pic():
     idx = request.form.get("idx", type=int)
-    his_img = get_mnq_imgs(idx)
+    his_img = get_mnq_imgs(idx)[:10]
     return Response(get_msg(True, his_img), mimetype='application/json')
 
 
