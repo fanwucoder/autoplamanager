@@ -4,6 +4,7 @@ import os
 import time
 from datetime import datetime as dt
 from threading import Thread, Lock
+from typing import Union
 
 from Log import log
 from MNQ import MNQ
@@ -11,7 +12,7 @@ from dnconsole import Dnconsole
 from xyconsole import XYConsole
 
 ZL_ACCOUNT = {
-    "13259490164": "fanwu123",
+    # "13259490164": "fanwu123",
     # "feiniao123": "feiniao123",
     # "feiniao124": "feiniao124",
     # "feiniao125": "feiniao125"
@@ -22,7 +23,7 @@ account_use = {
 
 
 class AutoRunner(Thread):
-    def __init__(self, console: Dnconsole = None, *args, **kwargs):
+    def __init__(self, console: Union[Dnconsole, XYConsole] = None, *args, **kwargs):
         """
         :param max_runner number
         :param except_runner list
@@ -57,6 +58,7 @@ class AutoRunner(Thread):
             self.console = XYConsole()
         else:
             self.console = console
+        self.all_runner = {}
 
     def run(self) -> None:
         self.run_app()
@@ -66,19 +68,23 @@ class AutoRunner(Thread):
         self.is_stop = False
         log.info("开始运行自动任务")
 
+        cnt = 0
         while self.is_running():
             if self._lock.acquire(True, timeout=100):
                 try:
                     self.check_status()
                     self.start_one()
+                    if cnt % 10 == 0:
+                        self.get_pictures()
                 except:
                     log.exception("运行出错了")
                 finally:
                     self._lock.release()
+            cnt += 1
             time.sleep(10)
 
     def stop(self):
-        for k, mnq in self.runner:
+        for k, mnq in self.runner.items():
             mnq.quit()
         self.is_stop = True
 
@@ -102,7 +108,7 @@ class AutoRunner(Thread):
                 self.mnq_path = config['common']['mnq_path']
                 self.script_path = config['common']['script_path']
                 self.console.set_mnq_path(self.mnq_path)
-                self.update_scripts(self.script_path)
+                self.update_instance()
 
                 if config['clear_stop']:
                     self.clear_stop()
@@ -114,7 +120,7 @@ class AutoRunner(Thread):
     def is_running(self):
         return not self.is_stop
 
-    def start_one(self):
+    def get_rest(self):
         app_list = self.include
         if self.running >= self.max_runner:
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
@@ -124,9 +130,10 @@ class AutoRunner(Thread):
             log.debug("没有剩余的任务了")
             return
         idx = rest[0]
-        config_name = self.write_config(idx)
-        mnq = self.runner.setdefault(idx, MNQ(idx, config_name=config_name, runner=self, console=self.console))
+        return idx
 
+    def start_mnq_by_idx(self, idx):
+        mnq = self.get_mnq_instance(idx)
         # 忽略已经运行的模拟器
         if mnq.is_running():
             log.info("index:%d,name:%s已经开始运行了", mnq.idx, mnq.name)
@@ -136,17 +143,30 @@ class AutoRunner(Thread):
 
             mnq.launch()
             mnq.get_picture()
+            self.runner[idx] = mnq
             self.running += 1
         except:
             # self.mnq.quit(task.index)
             log.exception("模拟器%d启动报错", mnq.idx)
 
-    def check_status(self):
+    def start_one(self):
+        idx = self.get_rest()
+        if idx:
+            self.start_mnq_by_idx(idx)
 
+    def get_mnq_instance(self, idx):
+        return self.all_runner.get(idx, None)
+
+    def get_pictures(self):
+        for k, mnq in self.all_runner.items():
+            if mnq.is_running():
+                mnq.get_picture()
+
+    def check_status(self):
         self.account_use.clear()
         self.running = 0
         log.debug("check running status")
-        for k, mnq in list(self.runner.items()):
+        for k, mnq in self.all_runner.items():
             if mnq.is_running():
                 self.running += 1
                 # 实时记录账号使用
@@ -156,21 +176,24 @@ class AutoRunner(Thread):
                 status = mnq.get_status()
                 if status == "start\n":
                     log.info("%d脚本开始运行", k)
-                elif status == "finish\n":
+                elif status == "finish\n" or mnq.get_runtime() > 7200 or status == 'quit lua\n':
                     log.info("%d脚本执行完毕", k)
                     mnq.get_picture()
                     mnq.quit()
                     self.remove_stop(k)
                     self.stop_mnq[k] = mnq
-
-            else:
-                self.remove_stop(k)
+            elif k in self.runner:
+                del self.runner[k]
+            # else:
+            #     self.remove_stop(k)
+            #     self.stop_mnq[k] = mnq
 
         date = dt.now()
         if date.strftime("%Y-%m-%d") > self.last_date.strftime("%Y-%m-%d"):
             if date.hour >= 6:
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
+                self.clear_stop()
         log.info("账号使用情况:%s", self.account_use)
 
     def remove_stop(self, k):
@@ -222,9 +245,22 @@ class AutoRunner(Thread):
             for k in list(self.stop_mnq.keys()):
                 del self.stop_mnq[k]
 
-    def update_scripts(self, script_path):
-        for k, mnq in self.runner.items():
-            mnq.set_script_path(script_path)
+    def update_instance(self):
+        for k, mnq in list(self.all_runner.items()):
+            if k not in self.include and mnq.is_running():
+                mnq.quit()
+                del self.all_runner[k]
+                if k in self.runner:
+                    del self.runner[k]
+                if k in self.stop_mnq:
+                    del self.stop_mnq[k]
+        for i in self.include:
+            mnq = self.all_runner.get(i, None)
+            config_name = self.write_config(idx=i)
+            if i not in self.all_runner:
+                mnq = MNQ(idx=i, config_name=config_name, console=self.console, runner=self)
+                self.all_runner[i] = mnq
+            mnq.set_script_path(self.script_path)
 
     def has_zl(self):
         ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
@@ -243,6 +279,24 @@ class AutoRunner(Thread):
             "zl_account": self.task_info["zl_account"],
             'zl_password': self.task_info["zl_password"],
         }
+
+    def get_DnPlayers(self):
+        return [d for d in self.console.get_list() if d.index in self.include]
+
+    def stop_mnq_by_idx(self, idx):
+        for k, mnq in self.runner.items():
+            if k == idx:
+                mnq.quit()
+            if k in self.runner:
+                del self.runner[k]
+                self.stop_mnq[k] = self.get_mnq_instance(k)
+            return True
+        return False
+
+    def mark_img(self, idx):
+        mnq = self.get_mnq_instance(idx)  # type:MNQ
+        if mnq.is_running():
+            mnq.get_picture()
 
 
 def main():

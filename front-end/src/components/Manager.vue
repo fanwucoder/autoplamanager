@@ -33,16 +33,33 @@
 
       </a-row>
 
-      <a-modal v-model="pic_history" title="Basic Modal">
-        <img v-for="img in history_imgs" :src="img" class="last_img"/>
+      <a-modal v-model="pic_history" title="历史截图" width="900px" height="600px"
+               :bodyStyle="{width:'900px',height:'600px',overflow:'scroll'}">
+        <div style="text-align: center;width:100%;">
+          <img v-for="img in history_imgs" :src="img" class="his_img"/>
+        </div>
+
       </a-modal>
     </a-layout-content>
     <a-layout-footer></a-layout-footer>
   </a-layout>
 </template>
 <style scoped>
+.his-imgs {
+  width: 800px;
+  height: 600px;
+  overflow: scroll;
+}
+
 .ant-layout-header {
   background: #ffffff;
+}
+
+.his_img {
+  margin: 5px;
+  width: 320px;
+  height: 180px;
+
 }
 
 .last_img {

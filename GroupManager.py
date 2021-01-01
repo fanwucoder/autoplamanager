@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
+import configparser
 import os
 import time
 
-from Log import log
-import configparser
-import threading
 import xyconsole
+from Log import log
 from leidianManager import AutoRunner
 
 
@@ -44,9 +43,14 @@ class GroupManager:
 
         self.is_stop = False
 
+    def get_single_group(self):
+        self.update_config()
+        for k, config in self._group_runner.items():
+            return self.get_group(k)
+
     def quit(self):
         self.is_stop = True
-        for name, ins in self._group_instance.items():
+        for name, ins in list(self._group_instance.items()):
             self.stop_group(name)
 
     def run(self):
@@ -141,4 +145,3 @@ class GroupManager:
             print(v)
             op.init(v["common"]['mnq_path'])
             return op
-

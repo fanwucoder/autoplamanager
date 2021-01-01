@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+
 from PIL import Image
 import time
 import requests
@@ -145,6 +147,25 @@ def phash(img):
         enumerate(map(lambda i: 0 if i < avg else 1, img.getdata())),
         0
     )
+
+
+def route_picture(path):
+    file_path, file_name = os.path.split(path)
+    im = Image.open(path)
+    width, heigh = im.size
+    if heigh > width:
+        angle = 90
+        im = im.rotate(angle, expand=True)
+        im.save('temp/route' + file_name)
+        os.remove(path)
+        os.rename('temp/route' + file_name, path)
+
+
+def crop_picture(path):
+    file_path, file_name = os.path.split(path)
+    im = Image.open(path)
+    cropped = im.crop((0, 0, 200, 100))
+    cropped.save(os.path.join(file_path, 'crop_' + file_name))
 # im1=Image.open("temp.png")
 # im2=Image.open("公告.png")
 # print(is_imgs_similar(im1,im2))

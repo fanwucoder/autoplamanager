@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Flask,Response,send_from_directory
+from concurrent.futures.thread import ThreadPoolExecutor
+
+from flask import Flask, Response, send_from_directory, redirect
 from flask import request
 from PIL import Image
 import time
@@ -11,72 +13,104 @@ from datetime import datetime as dt
 import requests
 from Utils import get_ocr_data, image2gray, is_imgs_similar, get_ocr_num
 from GroupManager import GroupManager
-manager=GroupManager()
+import time
+import threading
+from Log import log
+
+from leidianManager import AutoRunner
+
+server_base = "http://192.168.0.103:5000/"
+manager = GroupManager()
 manager.init()
-mnq_op=manager.get_operate()
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder='static', static_url_path='/static')
+executor = ThreadPoolExecutor(2)
+
+
+def start_groups():
+    manager.run()
+
+
+manager_thread = threading.Thread(target=start_groups)
+manager_thread.start()
+time.sleep(1)
+group_runner = manager.get_single_group()  # type:AutoRunner
 
 
 @app.after_request
 def cors(environ):
-    environ.headers['Access-Control-Allow-Origin']='*'
-    environ.headers['Access-Control-Allow-Method']='*'
-    environ.headers['Access-Control-Allow-Headers']='x-requested-with,content-type'
+    environ.headers['Access-Control-Allow-Origin'] = '*'
+    environ.headers['Access-Control-Allow-Method'] = '*'
+    environ.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
     return environ
+
+
 @app.route('/finish_result/<path:filename>')
 def custom_static(filename):
     return send_from_directory("finish_result", filename)
 
+
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
-json_default=lambda obj: obj.__dict__
+    return send_from_directory(".", "index.html")
+
+
+json_default = lambda obj: obj.__dict__
+
+
 def get_last_image(idx):
-    imgs=get_mnq_imgs(idx,"20201230")
-    imgs=[x for x in imgs if x.endswith("start_run.png")]
+    imgs = get_mnq_imgs(idx)
+    imgs = [x for x in imgs if x.endswith("start_run.png")]
     # print(imgs)
     sorted(imgs)
-    if len(imgs)>0:
-        return "http://localhost:5000/"+imgs[-1].replace("\\","/")
+    if len(imgs) > 0:
+        return imgs[-1].replace("\\", "/")
     return None
-def get_mnq_imgs(idx,date=None):
+
+
+def get_mnq_imgs(idx, date=None):
     if date is None:
-        date=dt.now().strftime("%Y%m%d")
-    path="finish_result"
-    pre="%d_%s"%(idx,date)
-    names=[]
+        date = dt.now().strftime("%Y%m%d")
+    path = "finish_result"
+    pre = "%d_%s" % (idx, date)
+    names = []
     for f in os.listdir(path):
         if f.startswith(pre):
-            fpath=os.path.join(path,f)
-            names.append(fpath.replace("\\","/"))
+            fpath = os.path.join(path, f)
+            names.append(fpath.replace("\\", "/"))
     return names
-def get_crop_imgs(idx,date=None):
-    imgs=["http://localhost:5000/"+x for x in get_crop_file(idx,date) if "game" in x]
-    imgs=sorted(imgs)
+
+
+def get_crop_imgs(idx, date=None):
+    imgs = [x for x in get_crop_file(idx, date) if "game" in x]
+    imgs = sorted(imgs)
+    imgs = imgs[:4]
     return imgs
-def get_crop_file(idx,date=None):
+
+
+def get_crop_file(idx, date=None):
     if date is None:
-        date=dt.now().strftime("%Y%m%d")
-    path="finish_result"
-    pre="crop_%d_%s"%(idx,date)
-    names=[]
+        date = dt.now().strftime("%Y%m%d")
+    path = "finish_result"
+    pre = "crop_%d_%s" % (idx, date)
+    names = []
     for f in os.listdir(path):
         if f.startswith(pre):
-            fpath=os.path.join(path,f)
-            names.append(fpath.replace("\\","/"))
+            fpath = os.path.join(path, f)
+            names.append(fpath.replace("\\", "/"))
     return names
-@app.route("/list")
+
+
+@app.route("/api/list")
 def list_mnq():
-    import random
-    from dnconsole import DnPlayer
-    datas=[]
-    for i in range(20):
-        data=[i,"name"+str(i),0,0,random.randint(0,2),0,0]
-        status=DnPlayer(data)
-        status.last_img=get_last_image(status.index)
-        status.img=get_crop_imgs(status.index,"20201230")
+    datas = []
+    for status in group_runner.get_DnPlayers():
+        status.last_img = get_last_image(status.index)
+        status.img = get_crop_imgs(status.index)
         datas.append(status)
-    return  Response(json.dumps(datas,default=json_default), mimetype='application/json')
+    return Response(json.dumps(datas, default=json_default), mimetype='application/json')
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -186,7 +220,49 @@ def save_img():
     return str(False)
 
 
+@app.route('/api/stop_mnq', methods=['GET', 'POST'])
+def stop_mnq():
+    idx = request.form.get("idx", type=int)
+    result = group_runner.stop_mnq_by_idx(idx)
+    return Response(get_msg(result, None), mimetype='application/json')
+
+
+def _start_mnq(idx):
+    try:
+        group_runner.start_mnq_by_idx(idx)
+    except:
+        log.exception("一部任务启动失败")
+
+
+@app.route('/api/start_mnq', methods=['GET', 'POST'])
+def start_mnq():
+    idx = request.form.get("idx", type=int)
+    executor.submit(_start_mnq, idx)
+
+    return Response(get_msg(True, "启动成功"), mimetype='application/json')
+
+
+@app.route('/api/last_img', methods=['GET', 'POST'])
+def get_last_img():
+    idx = request.form.get("idx", type=int)
+    group_runner.mark_img(idx)
+    last_img = get_last_image(idx)
+    return Response(get_msg(True, last_img), mimetype='application/json')
+
+
+@app.route('/api/history_pic', methods=['GET', 'POST'])
+def history_pic():
+    idx = request.form.get("idx", type=int)
+    his_img = get_mnq_imgs(idx)
+    return Response(get_msg(True, his_img), mimetype='application/json')
+
+
+def get_msg(success, data):
+    return json.dumps({"success": success, "data": data})
+
+
 import os
 
-print(os.path.abspath("."))
-app.run(host='0.0.0.0')
+if __name__ == '__main__':
+    print(os.path.abspath("."))
+    app.run(host='0.0.0.0')

@@ -5,9 +5,15 @@ from typing import Union
 from Log import log
 import get_proxy
 from dnconsole import Dnconsole
+from datetime import datetime as dt
+import threading
 import time
 
 from xyconsole import XYConsole
+
+
+def launch_thread(mnq):
+    mnq.launch_()
 
 
 class MNQ:
@@ -24,15 +30,12 @@ class MNQ:
         :param kwargs:
         :return:
         """
+        self.start_date = dt.now()
         self.idx = idx
         self.script_path = "scripts"
         self.runner = runner
         # self.device_path = "/sdcard/TouchSprite"
-        my_config_name = config_name + "%d_t" % self.idx
-        with open(config_name, mode="r", encoding="utf-8", newline="\n") as f:
-            with open(my_config_name, mode="w+", encoding="utf-8", newline="\n") as f1:
-                f1.write(f.read())
-        self.config_name = my_config_name
+        self.set_config_name(config_name)
 
         if console is None:
             self.console = Dnconsole()
@@ -40,11 +43,19 @@ class MNQ:
             self.console = console
         self.dnplayer = self.console.get_dnplayer(idx)
 
+    def set_config_name(self, config_name):
+        my_config_name = config_name + "%d_t" % self.idx
+        with open(config_name, mode="r", encoding="utf-8", newline="\n") as f:
+            with open(my_config_name, mode="w+", encoding="utf-8", newline="\n") as f1:
+                f1.write(f.read())
+        self.config_name = my_config_name
+
     @property
     def name(self):
         return self.dnplayer.name
 
     def start_game(self):
+        log.info("运行内置脚本")
         index = self.idx
         name = self.name
         config_name = self.config_name
@@ -72,6 +83,7 @@ class MNQ:
         return False
 
     def start_zl(self, conf):
+        log.info("运行紫龙脚本")
         idx = self.idx
         config_name = self.config_name
         # 通过adb启动紫龙脚本，自动练号
@@ -234,6 +246,9 @@ class MNQ:
     def is_running(self):
         return self.console.is_running(self.idx)
 
+    def get_runtime(self):
+        return dt.now().timestamp() - self.start_date.timestamp()
+
     def get_task_type(self):
         try:
             self.console.adb(self.idx, "pull %s %s" % ("/sdcard/" + "task_info.txt", "temp/task_info.txt"))
@@ -244,13 +259,21 @@ class MNQ:
         except:
             return None
 
-    def launch(self):
+    def launch_(self):
         task = self.runner.get_task()
         if task == "zl":
             zl_account = self.runner.get_zl_account()
             self.start_zl(zl_account)
         else:
             self.start_game()
+        self.start_date = dt.now()
+
+    def launch(self):
+        self.launch_()
+        # thread = threading.Thread(target=launch_thread, args=(self,))
+        # thread.start()
+        # time.sleep(30)
+        return True
 
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"

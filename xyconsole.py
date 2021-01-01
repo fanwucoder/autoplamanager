@@ -4,6 +4,7 @@ import sys
 import time
 import traceback
 
+import Utils
 from dnconsole import DnPlayer
 import cv2 as cv
 import numpy as np
@@ -159,11 +160,11 @@ class XYConsole:
 
     @classmethod
     def is_running(cls, index: int) -> bool:
-        vm_list = cls.get_list()
-        for x in vm_list:
-            if x.index == index:
-                return x.is_running()
-        return False
+        cmd = cls.memuc + '  -i %d  isvmrunning  ' % (index)
+        process = os.popen(cmd)
+        result = process.read()
+        process.close()
+        return result.strip() == "Running"
 
     @classmethod
     def touch(cls, index: int, x: int, y: int, delay: int = 0):
@@ -250,8 +251,12 @@ class XYConsole:
             name = p.split("/")[-1]
             local_path = "%s_%s_%s" % (index, datetime.now().strftime("%Y%m%d%H%M%S"), name)
             if name.startswith("start") or name.startswith("finish"):
-                cls.dowload_file(index, p, os.path.join("finish_result", local_path))
+                file_path = os.path.join("finish_result", local_path)
+                cls.dowload_file(index, p, file_path)
                 cls.adb(index, "shell rm %s" % p)
+                Utils.route_picture(file_path)
+                # if "game" in file_path:
+                Utils.crop_picture(file_path)
 
 
 def _test():
