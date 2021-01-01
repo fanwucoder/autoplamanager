@@ -1,23 +1,25 @@
 {
-  "name": "mnq_admin",
+  "name": "front-end1",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "fanwucoder <254765517@qq.com>",
+  "author": "fan <254765517@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "lint": "eslint --ext .js,.vue src",
+    "test": "npm run unit",
+    "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
   },
   "dependencies": {
     "ant-design-vue": "^1.7.2",
+    "axios": "^0.21.1",
+    "qs": "^6.9.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
-    "axios": "^0.21.1",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
