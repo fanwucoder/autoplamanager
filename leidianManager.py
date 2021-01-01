@@ -12,10 +12,10 @@ from dnconsole import Dnconsole
 from xyconsole import XYConsole
 
 ZL_ACCOUNT = {
-    # "13259490164": "fanwu123",
-    # "feiniao123": "feiniao123",
-    # "feiniao124": "feiniao124",
-    # "feiniao125": "feiniao125"
+    "13259490164": "fanwu123",
+    "feiniao123": "feiniao123",
+    "feiniao124": "feiniao124",
+    "feiniao125": "feiniao125"
 }
 account_use = {
 
