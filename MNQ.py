@@ -89,13 +89,14 @@ class MNQ:
         # 通过adb启动紫龙脚本，自动练号
         if not self.launch_mnq(idx):
             return False
-        self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
-        self.console.adb(idx, "shell echo >/sdcard/touch_status.txt ")
-        self.console.adb(idx, "shell echo zl >/sdcard/task_info.txt ")
-        console = self.console
-
         zl_account = conf['zl_account']
         zl_password = conf['zl_password']
+        # self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
+        self.console.adb(idx, "shell echo >/sdcard/touch_status.txt ")
+        self.console.adb(idx, "shell echo zl >/sdcard/task_info.txt ")
+        self.console.adb(idx, "shell echo zlaccount:%s >/sdcard/zlaccount.txt " % zl_account)
+        console = self.console
+
         package = "com.aland.hsz"
         console.stopapp(idx, package)
         console.pressKey(idx, KEY_HOME)
@@ -232,15 +233,11 @@ class MNQ:
         self.console.get_result(self.idx)
 
     def get_zl_account(self):
-        self.console.adb(self.idx,
-                         "pull %s %s" % (MNQ.device_path + "/res/" + "run_config.txt", "temp/account_info.txt"))
-        if os.path.exists("temp/account_info.txt"):
-            with open("temp/account_info.txt", encoding="utf-8", mode='r', newline="\n") as f:
-                for line in f.readlines():
-                    if line.startswith("zl_account"):
-                        account = line.split("::")[1]
-                        account = account.strip()
-                        return account
+        ret = self.console.adb(self.idx, " shell cat /sdcard/zlaccount.txt")
+        for acc in ret.split("\n"):
+            acc = acc.strip()
+            if acc.startswith("zlaccount"):
+                return acc.split(":")[1]
         return None
 
     def is_running(self):
