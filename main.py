@@ -70,7 +70,7 @@ def get_last_image(idx):
 
 def get_mnq_imgs(idx, date=None):
     if date is None:
-        date = dt.now().strftime("%Y%m%d")
+        date = ''
     path = "finish_result"
     pre = "%d_%s" % (idx, date)
     names = []
