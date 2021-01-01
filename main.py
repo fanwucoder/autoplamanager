@@ -62,9 +62,9 @@ def get_last_image(idx):
     imgs = get_mnq_imgs(idx)
     imgs = [x for x in imgs if x.endswith("start_run.png")]
     # print(imgs)
-    sorted(imgs)
+    sorted(imgs, reverse=False)
     if len(imgs) > 0:
-        return imgs[-1].replace("\\", "/")
+        return imgs[0].replace("\\", "/")
     return None
 
 
@@ -78,12 +78,12 @@ def get_mnq_imgs(idx, date=None):
         if f.startswith(pre):
             fpath = os.path.join(path, f)
             names.append(fpath.replace("\\", "/"))
-    return names
+    return sorted(names, reverse=False)
 
 
 def get_crop_imgs(idx, date=None):
     imgs = [x for x in get_crop_file(idx, date) if "game" in x]
-    imgs = sorted(imgs)
+    imgs = sorted(imgs, reverse=False)
     imgs = imgs[:4]
     return imgs
 

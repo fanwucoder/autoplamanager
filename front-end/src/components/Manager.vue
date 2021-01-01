@@ -10,10 +10,10 @@
             <a slot="name" slot-scope="text">{{ text }}</a>
 
             <span slot="last_img" slot-scope="last_img,record">
-         <img :src="last_img" class="last_img" v-on:click="get_img(record)"/>
+         <img :src="last_img" class="last_img" v-on:click="get_img(record)" :title="last_img"/>
         </span>
             <span slot="img" slot-scope="img">
-         <img v-for="im in img" :src="im"/>
+         <img v-for="im in img" :src="im" :title="img"/>
         </span>
             <span slot="is_in_android" slot-scope="is_in_android">
           {{ is_in_android ? "运行中" : "停止" }}
@@ -36,7 +36,7 @@
       <a-modal v-model="pic_history" title="历史截图" width="900px" height="600px"
                :bodyStyle="{width:'900px',height:'600px',overflow:'scroll'}">
         <div style="text-align: center;width:100%;">
-          <img v-for="img in history_imgs" :src="img" class="his_img"/>
+          <img v-for="img in history_imgs" :src="img" class="his_img" :title="img"/>
         </div>
 
       </a-modal>

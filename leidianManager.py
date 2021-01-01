@@ -136,6 +136,7 @@ class AutoRunner(Thread):
         mnq = self.get_mnq_instance(idx)
         # 忽略已经运行的模拟器
         if mnq.is_running():
+            self.runner[idx] = mnq
             log.info("index:%d,name:%s已经开始运行了", mnq.idx, mnq.name)
             return
         log.info("开始启动模拟器,index:%d,name:%s", mnq.idx, mnq.name)
