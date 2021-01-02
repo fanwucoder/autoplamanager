@@ -134,6 +134,10 @@ class MNQ:
         console.inputText(idx, zl_account)
 
         console.touch(idx, 271, 651)
+        for i in range(20):
+            console.pressKey(idx, KEY_DELETE)
+            time.sleep(0.2)
+
         console.inputText(idx, zl_password)
         time.sleep(0.5)
         console.touch(idx, 357, 889)
