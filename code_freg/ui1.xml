@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<hierarchy rotation="0">
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,903][720,1247]">
+    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,903][720,1247]">
+      <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,903][720,1247]">
+        <node index="0" text="立即运行" resource-id="com.touchsprite.android:id/pop_up_run" class="android.widget.TextView" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,923][720,999]"/>
+        <node index="1" text="设置循环" resource-id="com.touchsprite.android:id/pop_up_run_method" class="android.widget.TextView" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,999][720,1075]"/>
+        <node index="2" text="定时运行" resource-id="com.touchsprite.android:id/pop_up_time" class="android.widget.TextView" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,1075][720,1151]"/>
+        <node index="3" text="开机运行" resource-id="com.touchsprite.android:id/pop_up_boot_run" class="android.widget.TextView" package="com.touchsprite.android" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" bounds="[492,1151][720,1227]"/>
+      </node>
+    </node>
+  </node>
+</hierarchy>
