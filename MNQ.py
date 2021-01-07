@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
+import json
 import os
+import time
+from datetime import datetime as dt
 from typing import Union
 
-from Log import log
-import get_proxy
-from dnconsole import Dnconsole
-from datetime import datetime as dt
-import threading
-import time
+from lxml import etree
 
+import Utils
+from Log import log
+from dnconsole import Dnconsole
 from xyconsole import XYConsole
 
 
@@ -22,7 +23,8 @@ class MNQ:
     device_path = "/sdcard/TouchSprite"
 
     # XYConsole
-    def __init__(self, idx: int, config_name: str, console: Union[Dnconsole, XYConsole] = None, runner=None, *args,
+    def __init__(self, idx: int, config_name: str, console: Union[Dnconsole, XYConsole] = None,
+                 runner=None, *args,
                  **kwargs):
         """
         :param console
@@ -192,20 +194,29 @@ class MNQ:
         self.console.wait_activity(index, "com.touchsprite.android/.activity.MainActivity", 120)
         self.console.swipe(index, (100, 300), (100, 700))
         time.sleep(5)
-        ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_main.png")])
-        # ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res\main.png")])
-        log.info("main 脚本位置%s", str(ret))
-        if ret:
-            log.info("开始启动main脚本")
-            i, xy = ret
-            self.console.touch(index, xy[0], xy[1])
-            time.sleep(2)
-            self.console.touch(index, 672, xy[1] + 10)
-            # time.sleep(2)
-            # Dnconsole.touch(index, 672, xy[1] + 160)
-            time.sleep(3)
-            i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
-            self.console.touch(index, 672, xy[1] + 5)
+        area = self.get_area("//node[@text='main.lua']")
+        self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+        time.sleep(2)
+        self.console.touch(self.idx, 672, area[1] + 20)
+        time.sleep(2)
+        area = self.get_area("//node[@text='立即运行']")
+        time.sleep(2)
+        self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+        time.sleep(2)
+        # ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_main.png")])
+        # # ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res\main.png")])
+        # log.info("main 脚本位置%s", str(ret))
+        # if ret:
+        #     log.info("开始启动main脚本")
+        #     i, xy = ret
+        #     self.console.touch(index, xy[0], xy[1])
+        #     time.sleep(2)
+        #     self.console.touch(index, 672, xy[1] + 10)
+        #     # time.sleep(2)
+        #     # Dnconsole.touch(index, 672, xy[1] + 160)
+        #     time.sleep(3)
+        #     i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
+        #     self.console.touch(index, 672, xy[1] + 5)
 
     def copyScripts(self, index):
         script_path = os.path.abspath(self.script_path)
@@ -230,11 +241,14 @@ class MNQ:
             return lines[-1]
 
     def quit(self):
+        self.console.adb(self.idx, "shell echo >/sdcard/touch_status.txt ")
         self.console.quit(self.idx)
 
     def get_picture(self, ):
         self.console.make_screencap(self.idx, "/sdcard/start_run.png")
         self.console.get_result(self.idx)
+        cwd = os.path.join(os.path.abspath("."), "finish_result")
+        Utils.execute_command("delete_old.bat", cwd)
 
     def get_zl_account(self):
         ret = self.console.adb(self.idx, " shell cat /sdcard/zlaccount.txt")
@@ -249,6 +263,20 @@ class MNQ:
 
     def get_runtime(self):
         return dt.now().timestamp() - self.start_date.timestamp()
+
+    def get_area(self, path):
+        self.console.adb(self.idx, "shell rm /sdcard/ui.xml -r -f ")
+        self.console.adb(self.idx, "shell uiautomator dump /sdcard/ui.xml")
+        ui_name = "temp/ui_%s.xml " % self.idx
+
+        self.console.adb(self.idx, "pull /sdcard/ui.xml %s" % ui_name)
+        a = etree.parse(ui_name)
+        data = a.xpath(path)[0]
+        ret = data.attrib.get("bounds")
+        pos = ret.replace("][", ",").replace("[", "").replace("]", "").split(",")
+        if os.path.exists(ui_name):
+            os.remove(ui_name)
+        return [int(x.strip()) for x in pos]
 
     def get_task_type(self):
         try:
@@ -267,6 +295,7 @@ class MNQ:
             self.start_zl(zl_account)
         else:
             self.start_game()
+        self.runner.write_task(self.idx, task)
         self.start_date = dt.now()
 
     def launch(self):
@@ -304,20 +333,39 @@ def main():
     console = XYConsole()
     index = 7
     idx = 7
-    mnq = MNQ(console=console)
-    cnt = 600
-    while cnt > 0:
-        find, pos = console.check_picture(idx, [RES_ZL_SET])
-        if find is not None:
-            check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
-            print("关闭广告")
-            break
-        find, pos = console.check_picture(idx, [RES_ZL_SET1])
-        if find is not None:
-            print("没有广告")
-            break
-        cnt = cnt - 1
-        time.sleep(1)
+    mnq = MNQ(12, "temp/group1_mnq.config", console=console, )
+    self = mnq
+    area = self.get_area("//node[@text='main.lua']")
+    self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+    time.sleep(2)
+    self.console.touch(self.idx, 672, area[1] + 20)
+    time.sleep(2)
+    area = self.get_area("//node[@text='立即运行']")
+    time.sleep(2)
+    self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+    time.sleep(2)
+    #     self.console.touch(index, xy[0], xy[1])
+    #     time.sleep(2)
+    #     self.console.touch(index, 672, xy[1] + 10)
+    #     # time.sleep(2)
+    #     # Dnconsole.touch(index, 672, xy[1] + 160)
+    #     time.sleep(3)
+    #     i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
+    #     self.console.touch(index, 672, xy[1] + 5)
+
+    # cnt = 600
+    # while cnt > 0:
+    #     find, pos = console.check_picture(idx, [RES_ZL_SET])
+    #     if find is not None:
+    #         check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
+    #         print("关闭广告")
+    #         break
+    #     find, pos = console.check_picture(idx, [RES_ZL_SET1])
+    #     if find is not None:
+    #         print("没有广告")
+    #         break
+    #     cnt = cnt - 1
+    #     time.sleep(1)
     # console.make_screencap(index, "/sdcard/start_run.png")
     # console.dowload_file(index,"/sdcard/start_run.png","temp/start_run.png")
     # console.get_result(index)

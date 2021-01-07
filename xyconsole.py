@@ -254,9 +254,10 @@ class XYConsole:
                 file_path = os.path.join("finish_result", local_path)
                 cls.dowload_file(index, p, file_path)
                 cls.adb(index, "shell rm %s" % p)
-                Utils.route_picture(file_path)
+                Utils.convert_jepg(Utils.route_picture(file_path))
                 # if "game" in file_path:
-                Utils.crop_picture(file_path)
+                Utils.convert_jepg(Utils.crop_picture(file_path))
+
 
 
 def _test():

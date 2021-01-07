@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # 注意，请自行导入上面的类代码，否则无法使用
+import json
 import os
 import time
 from datetime import datetime as dt
@@ -10,6 +11,7 @@ from Log import log
 from MNQ import MNQ
 from dnconsole import Dnconsole
 from xyconsole import XYConsole
+import random
 
 ZL_ACCOUNT = {
     "13259490164": "fanwu123",
@@ -17,9 +19,25 @@ ZL_ACCOUNT = {
     "feiniao124": "feiniao124",
     "feiniao125": "feiniao125"
 }
-account_use = {
+ret = []
+for k, v in ZL_ACCOUNT.items():
+    ret.append(k + "/" + v)
+print(",".join(ret))
 
-}
+
+def read_zl_count(name):
+    filename = "zl_count_%s.json" % name
+    if not os.path.exists(filename):
+        return {}
+    with open(filename, mode="r") as f:
+        data = f.read()
+        return json.loads(data)
+
+
+def write_config(runner_name, zl_config):
+    filename = "zl_count_%s.json" % runner_name
+    with open(filename, mode="w+", encoding="utf-8") as f:
+        f.write(json.dumps(zl_config))
 
 
 class AutoRunner(Thread):
@@ -32,6 +50,7 @@ class AutoRunner(Thread):
         """
         super().__init__(*args, **kwargs)
         self._lock = Lock()
+        self.zl_accounts = {}
         self.include = kwargs.get("include", [])
         self.max_runner = kwargs.get("max_runner", 1)
         self.except_runner = kwargs.get("except_runner", [])
@@ -105,6 +124,11 @@ class AutoRunner(Thread):
                     "common": config['common'],
                     "appType": config["appType"]
                 }
+                zl_accounts = config['zl_accounts']
+                if zl_accounts.strip():
+                    for a in zl_accounts.split(","):
+                        x, y = a.split("/")
+                        self.zl_accounts[x] = y
                 self.mnq_path = config['common']['mnq_path']
                 self.script_path = config['common']['script_path']
                 self.console.set_mnq_path(self.mnq_path)
@@ -126,6 +150,11 @@ class AutoRunner(Thread):
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
             return
         rest = list(set(app_list) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
+        zl_runcount = read_zl_count(self.runner_name)
+        if self.has_zl():
+            rest.sort(key=lambda x: zl_runcount.get(x, 0))
+        else:
+            rest.sort(key=lambda x: zl_runcount.get(x, 0), reverse=True)
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
             return
@@ -134,6 +163,8 @@ class AutoRunner(Thread):
 
     def start_mnq_by_idx(self, idx):
         mnq = self.get_mnq_instance(idx)
+        if not mnq:
+            return
         # 忽略已经运行的模拟器
         if mnq.is_running():
             self.runner[idx] = mnq
@@ -154,6 +185,14 @@ class AutoRunner(Thread):
         idx = self.get_rest()
         if idx:
             self.start_mnq_by_idx(idx)
+
+    def write_task(self, idx, task):
+        zl_config = read_zl_count(self.runner_name)
+        if task == "zl":
+            old_cnt = zl_config.get(idx, 0)
+            old_cnt += 1
+            zl_config[idx] = old_cnt
+            write_config(self.runner_name, zl_config)
 
     def get_mnq_instance(self, idx):
         return self.all_runner.get(idx, None)
@@ -218,10 +257,10 @@ class AutoRunner(Thread):
         return config_name
 
     def set_zl_account(self):
-        ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
+        ret = list(set(self.zl_accounts.keys()) - set(self.account_use.keys()))
         if len(ret) > 0:
             self.task_info["zl_account"] = ret[0]
-            self.task_info['zl_password'] = ZL_ACCOUNT[ret[0]]
+            self.task_info['zl_password'] = self.zl_accounts[ret[0]]
         else:
             self.task_info["zl_account"] = ""
             self.task_info['zl_password'] = ""
@@ -264,7 +303,7 @@ class AutoRunner(Thread):
             mnq.set_script_path(self.script_path)
 
     def has_zl(self):
-        ret = list(set(ZL_ACCOUNT.keys()) - set(self.account_use.keys()))
+        ret = list(set(self.zl_accounts.keys()) - set(self.account_use.keys()))
         return len(ret) > 0
 
     def get_task(self):
