@@ -64,6 +64,8 @@ class MNQ:
         if not self.launch_mnq(index):
             return False
         time.sleep(15)
+        self.console.pressKey(self.idx, KEY_BACK)
+        time.sleep(2)
         self.start_touch(index, name, config_name)
         return True
 
@@ -91,6 +93,9 @@ class MNQ:
         # 通过adb启动紫龙脚本，自动练号
         if not self.launch_mnq(idx):
             return False
+        self.console.pressKey(self.idx, KEY_BACK)
+        time.sleep(2)
+
         zl_account = conf['zl_account']
         zl_password = conf['zl_password']
         # self.console.adb(idx, "push %s %s" % (config_name, MNQ.device_path + "/res/" + "run_config.txt"))
