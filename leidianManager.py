@@ -118,6 +118,7 @@ class AutoRunner(Thread):
                     'task': config['task'],
                     "role": config['role'],
                     "副本": config["副本"],
+                    "区域":config["区域"],
                     "副本方式": config['副本方式'],
                     "分解装备": config['分解装备'],
                     "出售装备": config['出售装备'],

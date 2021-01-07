@@ -228,10 +228,10 @@ class MNQ:
         for f in os.listdir(script_path):
             path = os.path.join(script_path, f)
             if f.endswith("lua"):
-                self.console.adb(index, "shell rm %s" % (MNQ.device_path + "/lua/" + f))
+                self.console.adb(index, "shell rm -r -f %s" % (MNQ.device_path + "/lua/" + f))
                 self.console.adb(index, "push %s %s" % (path, MNQ.device_path + "/lua/" + f))
             else:
-                self.console.adb(index, "shell rm %s" % (MNQ.device_path + "/res/" + f))
+                self.console.adb(index, "shell rm -r -f%s" % (MNQ.device_path + "/res/" + f))
                 self.console.adb(index, "push %s %s" % (path, MNQ.device_path + "/res/" + f))
 
     def set_script_path(self, script_path):
