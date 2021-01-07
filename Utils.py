@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
-
+import os
+from subprocess import Popen
+from subprocess import Popen, PIPE
 from PIL import Image
 import time
 import requests
@@ -159,13 +161,38 @@ def route_picture(path):
         im.save('temp/route' + file_name)
         os.remove(path)
         os.rename('temp/route' + file_name, path)
+    return path
 
 
 def crop_picture(path):
     file_path, file_name = os.path.split(path)
     im = Image.open(path)
     cropped = im.crop((0, 0, 200, 100))
-    cropped.save(os.path.join(file_path, 'crop_' + file_name))
+    result = os.path.join(file_path, 'crop_' + file_name)
+    cropped.save(result)
+    return result
+
+
+def convert_jepg(path):
+    file_path, file_name = os.path.split(path)
+    name, ext = os.path.splitext(file_name)
+    dest = os.path.join(file_path, name + ".jpeg")
+    compress(path, dest)
+
+
+def compress(src, dest):
+    im = Image.open(src)
+    im = im.convert("RGB")
+    im.save(dest, "jpeg", optimize=True, quality=10)
+
+
 # im1=Image.open("temp.png")
 # im2=Image.open("公告.png")
 # print(is_imgs_similar(im1,im2))
+def execute_command(command, cwd=None):
+    ps = Popen(command, cwd=cwd, shell=True, stdout=PIPE, stderr=PIPE)
+
+    output_lines = ps.stdout.readlines()
+    for line in output_lines:
+        line = line.strip()
+        print(line)
