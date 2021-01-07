@@ -109,6 +109,7 @@ class XYConsole:
     @classmethod
     def adb(cls, index: int, command: str, silence: bool = False) -> str:
         cmd = cls.memuc + '  -i %d  adb  "%s"' % (index, command)
+        log.info("execute command:%s",cmd)
         if silence:
             os.system(cmd)
             return ''
