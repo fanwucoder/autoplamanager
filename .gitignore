@@ -5,6 +5,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 finish_result/*.png
+finish_result/*.jpeg
 # C extensions
 *.so
 temp
