@@ -19,22 +19,11 @@ from Log import log
 
 from leidianManager import AutoRunner
 
-server_base = "http://192.168.0.103:5000/"
-manager = GroupManager()
-manager.init()
-
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-executor = ThreadPoolExecutor(2)
 
 
 def start_groups():
     manager.run()
-
-
-manager_thread = threading.Thread(target=start_groups)
-manager_thread.start()
-time.sleep(1)
-group_runner = manager.get_single_group()  # type:AutoRunner
 
 
 @app.after_request
@@ -75,7 +64,7 @@ def get_mnq_imgs(idx, date=None):
     pre = "%d_%s" % (idx, date)
     names = []
     for f in os.listdir(path):
-        if f.startswith(pre):
+        if f.startswith(pre) and f.endswith(".jpeg"):
             fpath = os.path.join(path, f)
             names.append(fpath.replace("\\", "/"))
     return sorted(names, reverse=True)
@@ -95,7 +84,7 @@ def get_crop_file(idx, date=None):
     pre = "crop_%d_%s" % (idx, date)
     names = []
     for f in os.listdir(path):
-        if f.startswith(pre):
+        if f.startswith(pre) and f.endswith(".jpeg"):
             fpath = os.path.join(path, f)
             names.append(fpath.replace("\\", "/"))
     return names
@@ -264,5 +253,23 @@ def get_msg(success, data):
 import os
 
 if __name__ == '__main__':
+    import sys
+
+    port = 5000
+    only_web = False
+    if len(sys.argv) > 1:
+        only_web = sys.argv[1] == 'True'
+    if len(sys.argv) > 2:
+        port = int(sys.argv[2])
+    if not only_web:
+        server_base = "http://192.168.0.103:5000/"
+        manager = GroupManager()
+        manager.init()
+        executor = ThreadPoolExecutor(2)
+        manager_thread = threading.Thread(target=start_groups)
+        manager_thread.start()
+        time.sleep(1)
+        group_runner = manager.get_single_group()  # type:AutoRunner
+
     print(os.path.abspath("."))
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=port)
