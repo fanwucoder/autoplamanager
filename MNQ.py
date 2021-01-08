@@ -170,22 +170,24 @@ class MNQ:
 
         time.sleep(5)
         console.touch(idx, 430, 1094)
-        cnt = 0
-        while True:
-            find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
-            if find is not None:
-                print("找到登录")
-                console.touch(idx, 625, 420)
-                time.sleep(1)
-            find, pos = console.check_picture(idx, [RES_ZL_SS_BIND])
-            if find is not None:
-                print("找到绑定手机")
-                console.touch(idx, 881, 158)
-            time.sleep(1)
-            cnt += 1
-            if cnt > 30:
-                break
         return True
+
+    def check_login(self):
+        """
+        检测是否卡登录页面
+        """
+        idx = self.idx
+        console = self.console
+        find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
+        if find is not None:
+            log.info("找到登录")
+            console.touch(idx, 625, 420)
+            time.sleep(1)
+        find, pos = console.check_picture(idx, [RES_ZL_SS_BIND])
+        if find is not None:
+            log.info("找到绑定手机")
+            console.touch(idx, 881, 158)
+        time.sleep(1)
 
     def start_touch(self, index: int, name: str, config_name: str):
         # Dnconsole.adb(index, "kill-server",silence=False)

@@ -213,6 +213,7 @@ class AutoRunner(Thread):
                 if mnq.get_task_type() == "zl":
                     account = mnq.get_zl_account()
                     self.account_use[account] = k
+                    mnq.check_login()
                 if mnq.is_finish():
                     mnq.get_picture()
                     mnq.quit()
