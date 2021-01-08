@@ -244,7 +244,7 @@ class MNQ:
     def get_status(self):
 
         self.console.adb(self.idx, "pull %s %s" % ("/sdcard/touch_status.txt", "temp/touch_status.txt"))
-        with open("temp/touch_status.txt", mode='r') as f:
+        with open("temp/touch_status.txt", mode='r', encoding="utf-8") as f:
             lines = f.readlines()
 
             if len(lines) == 0:
