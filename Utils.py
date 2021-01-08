@@ -141,6 +141,12 @@ def is_imgs_similar(img1, img2):
     return True if hamming_distance(phash(img1), phash(img2)) <= 5 else False
 
 
+def is_similar_by_path(path1, path2):
+    img1 = Image.open(path1)
+    img2 = Image.open(path2)
+    return is_imgs_similar(img1, img2)
+
+
 def phash(img):
     img = img.resize((8, 8), Image.ANTIALIAS).convert('L')
     avg = reduce(lambda x, y: x + y, img.getdata()) / 64.
@@ -164,10 +170,10 @@ def route_picture(path):
     return path
 
 
-def crop_picture(path):
+def crop_picture(path, rect=(0, 0, 200, 100)):
     file_path, file_name = os.path.split(path)
     im = Image.open(path)
-    cropped = im.crop((0, 0, 200, 100))
+    cropped = im.crop()
     result = os.path.join(file_path, 'crop_' + file_name)
     cropped.save(result)
     return result

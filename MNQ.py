@@ -36,8 +36,12 @@ class MNQ:
         self.idx = idx
         self.script_path = "scripts"
         self.runner = runner
+        self.zl_block_cnt = 0
+        self.zl_block_lasttime = dt.now()
+        self.zl_login_cnt = 0
         self.last_status = ""
         self.last_status_time = dt.now()
+        self.zl_login = False
         # self.device_path = "/sdcard/TouchSprite"
         self.set_config_name(config_name)
 
@@ -176,6 +180,9 @@ class MNQ:
         """
         检测是否卡登录页面
         """
+        if self.get_runtime() < self.zl_login_cnt * 60:
+            return
+        self.zl_login_cnt += 1
         idx = self.idx
         console = self.console
         find, pos = console.check_picture(idx, [RES_ZL_SS_LOGIN])
@@ -331,6 +338,34 @@ class MNQ:
         self.runner.write_task(self.idx, task)
         self.start_date = dt.now()
 
+    def is_zl_block(self):
+        # 主要防止一直卡登录界面
+        if not self.zl_login:
+            if self.console.wait_picture(12, 1, RES_ZL_SS_DC):
+                log.info("找到电池了，登录进去了")
+                self.zl_login = True
+            else:
+                return False
+        if self.get_runtime() < self.zl_block_cnt * 60:
+            return False
+        path = self.console.get_screencap(self.idx)
+        crop = Utils.crop_picture(path, (103, 20, 207, 39))
+        last_file = "temp/%d_last.png" % self.idx
+        if not os.path.exists(last_file):
+            os.rename(crop, last_file)
+            return False
+
+        result = Utils.is_similar_by_path(crop, last_file)
+        if not result:
+            os.rename(crop, last_file)
+            self.zl_block_lasttime = dt.now()
+        else:
+            os.remove(crop)
+        os.remove(path)
+        self.zl_block_cnt += 1
+        return result and (
+                dt.now().timestamp() - self.zl_block_lasttime.timestamp()) > 10 * 60 and self.get_runtime() < 60 * 60
+
     def launch(self):
         self.launch_()
         # thread = threading.Thread(target=launch_thread, args=(self,))
@@ -347,6 +382,7 @@ RES_ZL_LOGIN = "res/zl/login.png"
 RES_ZL_MAIN_TASK = "res/zl/main_task.png"
 RES_ZL_SS_LOGIN = "res/zl/ss_login.png"
 RES_ZL_SS_BIND = "res/zl/ss_bind.png"
+RES_ZL_SS_DC = "res/zl/ss_dc.png"
 KEY_DELETE = 67
 KEY_HOME = 3
 KEY_BACK = 4
@@ -368,40 +404,7 @@ def main():
     idx = 7
     mnq = MNQ(12, "temp/group1_mnq.config", console=console, )
     self = mnq
-    area = self.get_area("//node[@text='main.lua']")
-    self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
-    time.sleep(2)
-    self.console.touch(self.idx, 672, area[1] + 20)
-    time.sleep(2)
-    area = self.get_area("//node[@text='立即运行']")
-    time.sleep(2)
-    self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
-    time.sleep(2)
-    #     self.console.touch(index, xy[0], xy[1])
-    #     time.sleep(2)
-    #     self.console.touch(index, 672, xy[1] + 10)
-    #     # time.sleep(2)
-    #     # Dnconsole.touch(index, 672, xy[1] + 160)
-    #     time.sleep(3)
-    #     i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
-    #     self.console.touch(index, 672, xy[1] + 5)
-
-    # cnt = 600
-    # while cnt > 0:
-    #     find, pos = console.check_picture(idx, [RES_ZL_SET])
-    #     if find is not None:
-    #         check_tap(console, idx, [RES_ZL_SET], [[562, 406]])
-    #         print("关闭广告")
-    #         break
-    #     find, pos = console.check_picture(idx, [RES_ZL_SET1])
-    #     if find is not None:
-    #         print("没有广告")
-    #         break
-    #     cnt = cnt - 1
-    #     time.sleep(1)
-    # console.make_screencap(index, "/sdcard/start_run.png")
-    # console.dowload_file(index,"/sdcard/start_run.png","temp/start_run.png")
-    # console.get_result(index)
+    print(mnq.is_zl_block())
     idx = 7
 
 
