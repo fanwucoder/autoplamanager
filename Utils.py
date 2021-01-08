@@ -173,7 +173,7 @@ def route_picture(path):
 def crop_picture(path, rect=(0, 0, 200, 100)):
     file_path, file_name = os.path.split(path)
     im = Image.open(path)
-    cropped = im.crop()
+    cropped = im.crop(rect)
     result = os.path.join(file_path, 'crop_' + file_name)
     cropped.save(result)
     return result
