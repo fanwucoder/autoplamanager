@@ -221,6 +221,7 @@ class AutoRunner(Thread):
                     self.stop_mnq[k] = mnq
                     continue
                 if mnq.is_block():
+                    log.info("卡屏了，退出重启,%d", k)
                     mnq.quit()
                     self.remove_stop(k)
                     continue
