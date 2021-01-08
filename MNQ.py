@@ -263,6 +263,8 @@ class MNQ:
         return result
 
     def is_block(self, timeout=10 * 60):
+        if self.get_task_type() == "zl":
+            return False
         last_time = dt.now().timestamp() - self.last_status_time.timestamp()
         result = last_time >= timeout
         if result:
