@@ -118,7 +118,7 @@ class AutoRunner(Thread):
                     'task': config['task'],
                     "role": config['role'],
                     "副本": config["副本"],
-                    "区域":config["区域"],
+                    "区域": config["区域"],
                     "副本方式": config['副本方式'],
                     "分解装备": config['分解装备'],
                     "出售装备": config['出售装备'],
@@ -209,20 +209,21 @@ class AutoRunner(Thread):
         log.debug("check running status")
         for k, mnq in self.all_runner.items():
             if mnq.is_running():
-                self.running += 1
                 # 实时记录账号使用
                 if mnq.get_task_type() == "zl":
                     account = mnq.get_zl_account()
                     self.account_use[account] = k
-                status = mnq.get_status()
-                if status == "start\n":
-                    log.info("%d脚本开始运行", k)
-                elif status == "finish\n" or mnq.get_runtime() > 7200 or status == 'quit lua\n':
-                    log.info("%d脚本执行完毕", k)
+                if mnq.is_finish():
                     mnq.get_picture()
                     mnq.quit()
                     self.remove_stop(k)
                     self.stop_mnq[k] = mnq
+                    continue
+                if mnq.is_block():
+                    mnq.quit()
+                    self.remove_stop(k)
+                    continue
+                self.running += 1
             elif k in self.runner:
                 del self.runner[k]
             # else:

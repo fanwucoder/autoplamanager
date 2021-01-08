@@ -36,6 +36,8 @@ class MNQ:
         self.idx = idx
         self.script_path = "scripts"
         self.runner = runner
+        self.last_status = ""
+        self.last_status_time = dt.now()
         # self.device_path = "/sdcard/TouchSprite"
         self.set_config_name(config_name)
 
@@ -238,12 +240,34 @@ class MNQ:
         self.script_path = script_path
 
     def get_status(self):
+
         self.console.adb(self.idx, "pull %s %s" % ("/sdcard/touch_status.txt", "temp/touch_status.txt"))
         with open("temp/touch_status.txt", mode='r') as f:
             lines = f.readlines()
+
             if len(lines) == 0:
                 return None
-            return lines[-1]
+            status = lines[-1]
+            if status == "start\n":
+                log.info("%d脚本开始运行", self.idx)
+            if status != self.last_status:
+                self.last_status = status
+                self.last_status_time = dt.now()
+            return status
+
+    def is_finish(self):
+        status = self.get_status()
+        result = status == "finish\n" or self.get_runtime() > 7200 or status == 'quit lua\n'
+        if result:
+            log.info("%d脚本执行完毕", self.idx)
+        return result
+
+    def is_block(self, timeout=10 * 60):
+        last_time = dt.now().timestamp() - self.last_status_time.timestamp()
+        result = last_time >= timeout
+        if result:
+            log.info("模拟器%d运行卡住了", self.idx)
+        return result
 
     def quit(self):
         self.console.adb(self.idx, "shell echo >/sdcard/touch_status.txt ")
