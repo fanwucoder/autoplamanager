@@ -194,6 +194,7 @@ class AutoRunner(Thread):
             old_cnt += 1
             zl_config[idx] = old_cnt
             write_config(self.runner_name, zl_config)
+            log.info("%d运行紫龙脚本第%d次", idx, old_cnt)
 
     def get_mnq_instance(self, idx):
         return self.all_runner.get(idx, None)
