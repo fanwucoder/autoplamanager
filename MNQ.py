@@ -6,7 +6,7 @@ from datetime import datetime as dt
 from typing import Union
 
 from lxml import etree
-
+import lxml
 import Utils
 from Log import log
 from dnconsole import Dnconsole
@@ -157,23 +157,34 @@ class MNQ:
         time.sleep(2)
         console.touch(idx, 686, 510)
 
-        check_tap(console, idx, [RES_ZL_MAIN_TASK], [(85, 793)])
-
+        path = "//node[@text='角色选择']"
+        self.tap_path(path)
         time.sleep(2)
-        console.touch(idx, 206, 700)
-        time.sleep(0.5)
-        console.touch(idx, 214, 228)
-        time.sleep(0.5)
-        console.touch(idx, 264, 193)
-        time.sleep(0.5)
-        console.touch(idx, 537, 593)
-        time.sleep(0.5)
-        console.touch(idx, 540, 652)
-        time.sleep(0.5)
-        console.touch(idx, 368, 1230)
-
+        path = "//node[@text='主线任务']"
+        self.tap_checked(path)
+        time.sleep(2)
+        path = "//node[@text='通用版']"
+        if self.tap_path(path):
+            time.sleep(2)
+            path = "//node[@text='上士']"
+            self.tap_path(path)
+            time.sleep(2)
+        path = "//node[@text='功能设置']"
+        self.tap_path(path)
+        time.sleep(2)
+        path = "//node[@text='刷完关闭游戏']"
+        if self.tap_path(path):
+            time.sleep(2)
+            path = "//node[@text='等待重启']"
+            self.tap_path(path)
+        time.sleep(2)
+        path = "//node[@text='启动脚本']"
+        self.tap_path(path)
         time.sleep(5)
-        console.touch(idx, 430, 1094)
+        path = "//node[@text='运行脚本']"
+        self.tap_path(path)
+        time.sleep(5)
+
         return True
 
     def check_login(self):
@@ -219,20 +230,6 @@ class MNQ:
         time.sleep(2)
         self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
         time.sleep(2)
-        # ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_main.png")])
-        # # ret = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res\main.png")])
-        # log.info("main 脚本位置%s", str(ret))
-        # if ret:
-        #     log.info("开始启动main脚本")
-        #     i, xy = ret
-        #     self.console.touch(index, xy[0], xy[1])
-        #     time.sleep(2)
-        #     self.console.touch(index, 672, xy[1] + 10)
-        #     # time.sleep(2)
-        #     # Dnconsole.touch(index, 672, xy[1] + 160)
-        #     time.sleep(3)
-        #     i, xy = self.console.check_picture(index, [os.path.join(os.path.abspath("."), "res/xy_脚本开始.png")])
-        #     self.console.touch(index, 672, xy[1] + 5)
 
     def copyScripts(self, index):
         script_path = os.path.abspath(self.script_path)
@@ -305,18 +302,29 @@ class MNQ:
         return dt.now().timestamp() - self.start_date.timestamp()
 
     def get_area(self, path):
+        data = self.ui_by_path(path)
+        return self.ele_area(data)
+
+    @staticmethod
+    def ele_area(ele):
+        if ele is not None:
+            ret = ele.attrib.get("bounds")
+            pos = ret.replace("][", ",").replace("[", "").replace("]", "").split(",")
+            return [int(x.strip()) for x in pos]
+
+    def ui_by_path(self, path):
+        ui_tree = self.dup_ui()
+        data = ui_tree.xpath(path)
+        if data:
+            return data[0]
+
+    def dup_ui(self):
         self.console.adb(self.idx, "shell rm /sdcard/ui.xml -r -f ")
         self.console.adb(self.idx, "shell uiautomator dump /sdcard/ui.xml")
         ui_name = "temp/ui_%s.xml " % self.idx
-
         self.console.adb(self.idx, "pull /sdcard/ui.xml %s" % ui_name)
         a = etree.parse(ui_name)
-        data = a.xpath(path)[0]
-        ret = data.attrib.get("bounds")
-        pos = ret.replace("][", ",").replace("[", "").replace("]", "").split(",")
-        if os.path.exists(ui_name):
-            os.remove(ui_name)
-        return [int(x.strip()) for x in pos]
+        return a
 
     def get_task_type(self):
         try:
@@ -366,6 +374,20 @@ class MNQ:
         return result and (
                 dt.now().timestamp() - self.zl_block_lasttime.timestamp()) > 10 * 60 and self.get_runtime() < 60 * 60
 
+    def tap_checked(self, path):
+        ele = self.ui_by_path(path)  # type:lxml.etree.Element
+        if ele.attrib.get("checked", "false") != "true":
+            area = self.ele_area(ele)
+            self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+
+    def tap_path(self, path):
+        ele = self.ui_by_path(path)
+        area = self.ele_area(ele)
+        if area:
+            self.console.touch(self.idx, int((area[0] + area[2]) / 2), int((area[1] + area[3]) / 2))
+            return True
+        return False
+
     def launch(self):
         self.launch_()
         # thread = threading.Thread(target=launch_thread, args=(self,))
@@ -404,7 +426,37 @@ def main():
     idx = 7
     mnq = MNQ(12, "temp/group1_mnq.config", console=console, )
     self = mnq
-    print(mnq.is_zl_block())
+    path = "//node[@text='角色选择']"
+    self.tap_path(path)
+    time.sleep(2)
+    path = "//node[@text='主线任务']"
+    mnq.tap_checked(path)
+    time.sleep(2)
+    path = "//node[@text='通用版']"
+    if self.tap_path(path):
+        time.sleep(2)
+        path = "//node[@text='上士']"
+        self.tap_path(path)
+        time.sleep(2)
+    path = "//node[@text='功能设置']"
+    self.tap_path(path)
+    time.sleep(2)
+    path = "//node[@text='刷完关闭游戏']"
+    if self.tap_path(path):
+        time.sleep(2)
+        path = "//node[@text='等待重启']"
+        self.tap_path(path)
+    time.sleep(2)
+    path = "//node[@text='启动脚本']"
+    self.tap_path(path)
+    time.sleep(5)
+    path = "//node[@text='运行脚本']"
+    self.tap_path(path)
+    time.sleep(5)
+    # self.dup_ui()
+    # self.console.touch(mnq.idx,(area[0]+ret[2])/2,(ret[1]+ret[3])/2)
+    # self = mnq
+    # print(mnq.is_zl_block())
     idx = 7
 
 
