@@ -6,6 +6,7 @@ __pycache__/
 *$py.class
 finish_result/*.png
 finish_result/*.jpeg
+zl_count_*.json
 # C extensions
 *.so
 temp
