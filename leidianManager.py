@@ -154,8 +154,11 @@ class AutoRunner(Thread):
         zl_runcount = read_zl_count(self.runner_name)
         if self.has_zl():
             rest.sort(key=lambda x: zl_runcount.get(x, 0))
+            log.info("启动顺序按紫龙:%s",rest)
         else:
             rest.sort(key=lambda x: zl_runcount.get(x, 0), reverse=True)
+            log.info("启动顺序不按按紫龙:%s", rest)
+
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
             return
@@ -190,10 +193,12 @@ class AutoRunner(Thread):
     def write_task(self, idx, task):
         zl_config = read_zl_count(self.runner_name)
         if task == "zl":
+            log.info("原始紫龙运行次数%s",zl_config)
             old_cnt = zl_config.get(idx, 0)
             old_cnt += 1
             zl_config[idx] = old_cnt
             write_config(self.runner_name, zl_config)
+            log.info("新紫龙运行次数%s", zl_config)
             log.info("%d运行紫龙脚本第%d次", idx, old_cnt)
 
     def get_mnq_instance(self, idx):
