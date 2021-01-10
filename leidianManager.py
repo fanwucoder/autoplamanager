@@ -151,12 +151,12 @@ class AutoRunner(Thread):
             log.debug("当前运行了%d个任务，已经超过最大任务数量%d了", self.running, self.max_runner)
             return
         rest = list(set(app_list) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
-        zl_runcount = read_zl_count(self.runner_name)
+        zl_record = read_zl_count(self.runner_name)
         if self.has_zl():
-            rest.sort(key=lambda x: zl_runcount.get(x, 0))
-            log.info("启动顺序按紫龙:%s",rest)
+            rest.sort(key=lambda x: zl_record.get(x, 0))
+            log.info("启动顺序按紫龙:%s,%s",rest,zl_record)
         else:
-            rest.sort(key=lambda x: zl_runcount.get(x, 0), reverse=True)
+            rest.sort(key=lambda x: zl_record.get(x, 0), reverse=True)
             log.info("启动顺序不按按紫龙:%s", rest)
 
         if len(rest) <= 0:
