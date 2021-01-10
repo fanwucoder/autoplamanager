@@ -153,10 +153,10 @@ class AutoRunner(Thread):
         rest = list(set(app_list) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
         zl_record = read_zl_count(self.runner_name)
         if self.has_zl():
-            rest.sort(key=lambda x: zl_record.get(x, 0))
-            log.info("启动顺序按紫龙:%s,%s",rest,zl_record)
+            rest.sort(key=lambda x: zl_record.get(str(x), 0))
+            log.info("启动顺序按紫龙:%s,%s", rest, zl_record)
         else:
-            rest.sort(key=lambda x: zl_record.get(x, 0), reverse=True)
+            rest.sort(key=lambda x: zl_record.get(str(x), 0), reverse=True)
             log.info("启动顺序不按按紫龙:%s", rest)
 
         if len(rest) <= 0:
@@ -191,9 +191,10 @@ class AutoRunner(Thread):
             self.start_mnq_by_idx(idx)
 
     def write_task(self, idx, task):
+        idx = str(idx)
         zl_config = read_zl_count(self.runner_name)
         if task == "zl":
-            log.info("原始紫龙运行次数%s",zl_config)
+            log.info("原始紫龙运行次数%s", zl_config)
             old_cnt = zl_config.get(idx, 0)
             old_cnt += 1
             zl_config[idx] = old_cnt
