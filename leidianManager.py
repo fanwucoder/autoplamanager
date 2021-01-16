@@ -56,6 +56,8 @@ class AutoRunner(Thread):
         self.except_runner = kwargs.get("except_runner", [])
         self.runner = {}
         self.account_use = {}
+        self.zl_use = 0
+        self.zl_max = 3 * 24 / 2 - 3
         self.stop_mnq = {}
         self.task_info = {
             'task': "playGamer",
@@ -152,16 +154,21 @@ class AutoRunner(Thread):
             return
         rest = list(set(app_list) - set(self.runner.keys()) - set(self.stop_mnq.keys()))
         zl_record = read_zl_count(self.runner_name)
-        if self.has_zl():
-            rest.sort(key=lambda x: zl_record.get(str(x), 0))
-            # log.info("启动顺序按紫龙:%s,%s", rest, zl_record)
-        else:
-            rest.sort(key=lambda x: zl_record.get(str(x), 0), reverse=True)
-            # log.info("启动顺序不按按紫龙:%s", rest)
 
         if len(rest) <= 0:
             log.debug("没有剩余的任务了")
             return
+        if self.has_zl():
+            rest.sort(key=lambda x: zl_record.get(str(x), 0))
+            self.zl_use += 1
+            # log.info("启动顺序按紫龙:%s,%s", rest, zl_record)
+        else:
+            rest.sort(key=lambda x: zl_record.get(str(x), 0), reverse=True)
+            rest_zl = self.zl_max - self.zl_use
+            if len(rest) < rest_zl:
+                return
+                # log.info("启动顺序不按按紫龙:%s", rest)
+
         idx = rest[0]
         return idx
 
