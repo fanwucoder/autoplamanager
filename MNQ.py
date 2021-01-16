@@ -146,7 +146,7 @@ class MNQ:
         time.sleep(1)
         console.inputText(idx, zl_account)
 
-        console.touch(idx, 271, 651)
+        console.touch(idx, 582,655)
         for i in range(20):
             console.pressKey(idx, KEY_DELETE)
             time.sleep(0.2)

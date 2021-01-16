@@ -14,7 +14,7 @@ from xyconsole import XYConsole
 import random
 
 ZL_ACCOUNT = {
-    "13259490164": "fanwu123",
+    # "13259490164": "fanwu123",
     "feiniao123": "feiniao123",
     "feiniao124": "feiniao124",
     "feiniao125": "feiniao125"
@@ -41,7 +41,7 @@ def write_config(runner_name, zl_config):
 
 
 class AutoRunner(Thread):
-    def __init__(self, console: Union[Dnconsole, XYConsole] = None, *args, **kwargs):
+    def __init__(self, console: Union[XYConsole, Dnconsole] = None, *args, **kwargs):
         """
         :param max_runner number
         :param except_runner list
@@ -168,7 +168,6 @@ class AutoRunner(Thread):
             if len(rest) <= rest_zl:
                 return
                 # log.info("启动顺序不按按紫龙:%s", rest)
-
         idx = rest[0]
         return idx
 
@@ -209,10 +208,10 @@ class AutoRunner(Thread):
             # log.info("新紫龙运行次数%s", zl_config)
             # log.info("%d运行紫龙脚本第%d次", idx, old_cnt)
 
-    def get_mnq_instance(self, idx):
+    def get_mnq_instance(self, idx) -> MNQ:
         return self.all_runner.get(idx, None)
 
-    def get_pictures(self):
+    def get_pictures(self) -> None:
         for k, mnq in self.all_runner.items():
             if mnq.is_running():
                 mnq.get_picture()
@@ -304,6 +303,7 @@ class AutoRunner(Thread):
                 del self.stop_mnq[k]
 
     def update_instance(self):
+        mnqs = [x.index for x in self.console.get_list()]
         for k, mnq in list(self.all_runner.items()):
             if k not in self.include and mnq.is_running():
                 mnq.quit()
@@ -313,6 +313,9 @@ class AutoRunner(Thread):
                 if k in self.stop_mnq:
                     del self.stop_mnq[k]
         for i in self.include:
+            if i not in mnqs:
+                log.warning("%s号模拟器不存在", i)
+                continue
             mnq = self.all_runner.get(i, None)
             config_name = self.write_config(idx=i)
             if i not in self.all_runner:
