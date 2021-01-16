@@ -165,7 +165,7 @@ class AutoRunner(Thread):
         else:
             rest.sort(key=lambda x: zl_record.get(str(x), 0), reverse=True)
             rest_zl = self.zl_max - self.zl_use
-            if len(rest) < rest_zl:
+            if len(rest) <= rest_zl:
                 return
                 # log.info("启动顺序不按按紫龙:%s", rest)
 
