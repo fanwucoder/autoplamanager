@@ -251,6 +251,7 @@ class AutoRunner(Thread):
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
                 self.clear_stop()
+                self.zl_use=0
         log.info("账号使用情况:%s", self.account_use)
 
     def remove_stop(self, k):
