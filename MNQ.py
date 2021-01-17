@@ -146,7 +146,7 @@ class MNQ:
         time.sleep(1)
         console.inputText(idx, zl_account)
 
-        console.touch(idx, 582,655)
+        console.touch(idx, 582, 655)
         for i in range(20):
             console.pressKey(idx, KEY_DELETE)
             time.sleep(0.2)
@@ -169,6 +169,9 @@ class MNQ:
             path = "//node[@text='上士']"
             self.tap_path(path)
             time.sleep(2)
+        else:
+            self.start_zl(conf)
+            return
         path = "//node[@text='功能设置']"
         self.tap_path(path)
         time.sleep(2)
