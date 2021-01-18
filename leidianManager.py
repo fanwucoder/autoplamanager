@@ -57,7 +57,8 @@ class AutoRunner(Thread):
         self.runner = {}
         self.account_use = {}
         self.zl_use = 0
-        self.zl_max = 3 * 24 / 2 - 3
+        # self.zl_max = 3 * 24 / 2 - 3
+        self.zl_max = 0
         self.stop_mnq = {}
         self.task_info = {
             'task': "playGamer",
@@ -251,7 +252,7 @@ class AutoRunner(Thread):
                 log.info("时间跳转%s到%s", self.last_date, date)
                 self.last_date = date
                 self.clear_stop()
-                self.zl_use=0
+                self.zl_use = 0
         log.info("账号使用情况:%s", self.account_use)
 
     def remove_stop(self, k):

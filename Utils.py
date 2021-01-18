@@ -170,6 +170,19 @@ def route_picture(path):
     return path
 
 
+def route_picture1(path):
+    file_path, file_name = os.path.split(path)
+    im = Image.open(path)
+    width, heigh = im.size
+    if heigh > width:
+        angle = 90
+        im = im.rotate(angle, expand=True)
+        im.save('route' + file_name)
+        os.remove(path)
+        os.rename('route' + file_name, path)
+    return path
+
+
 def crop_picture(path, rect=(0, 0, 200, 100)):
     file_path, file_name = os.path.split(path)
     im = Image.open(path)
