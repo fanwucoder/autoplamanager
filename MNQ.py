@@ -222,6 +222,7 @@ class MNQ:
         self.console.adb(index, "shell echo zl >/sdcard/task_info.txt ")
         self.console.invokeapp(index, "com.touchsprite.android")
         self.console.wait_activity(index, "com.touchsprite.android/.activity.MainActivity", 120)
+        self.check_update()
         self.console.swipe(index, (100, 300), (100, 700))
         time.sleep(5)
         area = self.get_area("//node[@text='main.lua']")
@@ -399,6 +400,38 @@ class MNQ:
         # time.sleep(30)
         return True
 
+    def check_update(self):
+        time.sleep(3)
+        # act = self.console.get_activity_name(self.idx)
+        path = "//node[@text='立即升级']"
+        ele = self.ui_by_path(path)
+        if  ele is None:
+            return
+        self.tap_path(path)
+        path = "//node[@text='安装']"
+        time_out = 100
+        while time_out > 0:
+            ele = self.ui_by_path(path)
+            if ele is not None and ele.attrib.get("enabled") == 'true':
+                self.tap_path(path)
+                break
+            time.sleep(1)
+            time_out -= 1
+        time.sleep(3)
+        path = "//node[@text='安装']"
+        self.tap_path(path)
+        time_out = 100
+        while time_out > 0:
+            path = "//node[@text='打开']"
+            ele = self.ui_by_path(path)
+            if ele is not None:
+                self.tap_path(path)
+                time.sleep(1)
+                break
+            time.sleep(1)
+            time_out -= 1
+        self.console.wait_activity(self.idx, "com.touchsprite.android/.activity.MainActivity", 120)
+
 
 RES_ZL_LAUNCH = "res/zl/zl_launch.png"
 RES_ZL_SET = "res/zl/set.png"
@@ -428,35 +461,36 @@ def main():
     console = XYConsole()
     index = 7
     idx = 7
-    mnq = MNQ(12, "temp/group1_mnq.config", console=console, )
-    self = mnq
-    path = "//node[@text='角色选择']"
-    self.tap_path(path)
-    time.sleep(2)
-    path = "//node[@text='主线任务']"
-    mnq.tap_checked(path)
-    time.sleep(2)
-    path = "//node[@text='通用版']"
-    if self.tap_path(path):
-        time.sleep(2)
-        path = "//node[@text='上士']"
-        self.tap_path(path)
-        time.sleep(2)
-    path = "//node[@text='功能设置']"
-    self.tap_path(path)
-    time.sleep(2)
-    path = "//node[@text='刷完关闭游戏']"
-    if self.tap_path(path):
-        time.sleep(2)
-        path = "//node[@text='等待重启']"
-        self.tap_path(path)
-    time.sleep(2)
-    path = "//node[@text='启动脚本']"
-    self.tap_path(path)
-    time.sleep(5)
-    path = "//node[@text='运行脚本']"
-    self.tap_path(path)
-    time.sleep(5)
+    mnq = MNQ(index, "temp/group1_mnq.config", console=console, )
+    mnq.start_touch(mnq.idx,"xxx",config_name=mnq.config_name)
+    # self = mnq
+    # path = "//node[@text='角色选择']"
+    # self.tap_path(path)
+    # time.sleep(2)
+    # path = "//node[@text='主线任务']"
+    # mnq.tap_checked(path)
+    # time.sleep(2)
+    # path = "//node[@text='通用版']"
+    # if self.tap_path(path):
+    #     time.sleep(2)
+    #     path = "//node[@text='上士']"
+    #     self.tap_path(path)
+    #     time.sleep(2)
+    # path = "//node[@text='功能设置']"
+    # self.tap_path(path)
+    # time.sleep(2)
+    # path = "//node[@text='刷完关闭游戏']"
+    # if self.tap_path(path):
+    #     time.sleep(2)
+    #     path = "//node[@text='等待重启']"
+    #     self.tap_path(path)
+    # time.sleep(2)
+    # path = "//node[@text='启动脚本']"
+    # self.tap_path(path)
+    # time.sleep(5)
+    # path = "//node[@text='运行脚本']"
+    # self.tap_path(path)
+    # time.sleep(5)
     # self.dup_ui()
     # self.console.touch(mnq.idx,(area[0]+ret[2])/2,(ret[1]+ret[3])/2)
     # self = mnq

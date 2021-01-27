@@ -11,8 +11,8 @@
         "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E08 Netflix 动画疯\"",
         "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 12\"",
         "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 20\"",
-        "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 06\"",
-        "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯\""
+        "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯\"",
+        "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 19\""
     ],
     "account_info": {
         "aaa": "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E09 Netflix 动画疯\"",
@@ -22,7 +22,7 @@
         "flybird125": "\"[SS] 🇭🇰 香港 油尖旺御金·国峯 網上行寬頻 E07\"",
         "zhuandaqian8007": "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E08 Netflix 动画疯\"",
         "haojixing1876": "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 12\"",
-        "dayigui21": "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 06\"",
+        "dayigui21": "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 19\"",
         "haojixing223": "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 20\""
     },
     "ss_info": {
@@ -34,7 +34,7 @@
         "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E08 Netflix 动画疯\"": "zhuandaqian8007",
         "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 12\"": "haojixing1876",
         "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 20\"": "haojixing223",
-        "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 06\"": "dayigui21",
-        "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯\"": "flybird123"
+        "\"[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E01 Netflix 动画疯\"": "flybird123",
+        "\"[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 19\"": "dayigui21"
     }
 }

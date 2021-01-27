@@ -132,11 +132,11 @@ def upload_file1():
         f = request.files['ocr_file']
         colors = request.args.get('colors', type=str)
         img = Image.open(f)
-        img.save("res/temp1.png")
+        img.save("temp/temp1.png")
         img1 = image2gray(img, colors)
         buffered = BytesIO()
         img1.save(buffered, format="png")
-        img1.save("res/temp.png", format="png")
+        img1.save("temp/temp.png", format="png")
         img_str = base64.b64encode(buffered.getvalue())
         data = get_ocr_num(img_str)
         print(data)

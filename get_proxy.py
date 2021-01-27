@@ -153,13 +153,14 @@ def get_proxy(name):
     return False
 
 
-def main():
+def main1():
     get_proxy("dayigui21")
     # "[SS] 🇨🇳 中国-台湾 IEPL HiNet固接 E02 Netflix 动画疯"
     "[SS] 🇭🇰 中国-香港 IEPL Equinix HK2 E 20"
     # clear_port(10800)
 
-
+def main():
+    pass
 if __name__ == '__main__':
     main()
 
